@@ -9,17 +9,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Participant {
 
-	String name;
-	String firstname;
-	
-	@Id
-	String email;
-
-	@OneToMany(mappedBy = "participant")
-	Collection<ListeReponse> reponses;
-	
-	public Participant() {
-	}
+	private String name, firstname, email;
+	private Collection<ListeReponse> reponses;
 
 	public Participant(String name, String firstname, String email) {
 		this.name = name;
@@ -43,10 +34,12 @@ public class Participant {
 		this.firstname = firstname;
 	}
 
+	@Id
 	public String getEmail() {
 		return email;
 	}
 
+	@OneToMany(mappedBy = "participant")
 	public Collection<ListeReponse> getReponses() {
 		return reponses;
 	}

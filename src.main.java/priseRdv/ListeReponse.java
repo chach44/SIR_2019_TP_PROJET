@@ -11,35 +11,23 @@ import javax.persistence.OneToMany;
 @Entity
 public class ListeReponse {
 
-
-	/**
-	 * TODO LIEN VERT A REVOIR
-	 */
-
-
-
+	private long id;
+	private Participant participant;
+	private Sondages sondage;
+	private Collection<Reponse> reponses;
+	
+	public ListeReponse(Participant participant, Sondages sondage) {
+		this.participant = participant;
+		this.sondage = sondage;
+	}
 
 	@Id 
 	@GeneratedValue
-	long id;
-
-	@ManyToOne
-	Participant participant;
-
-	@ManyToOne
-	Sondages sondage;
-
-	@OneToMany(mappedBy="reponsequestion")
-	Collection<Reponse> reponses;
-
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
+	@ManyToOne
 	public Participant getParticipant() {
 		return participant;
 	}
@@ -48,6 +36,7 @@ public class ListeReponse {
 		this.participant = participant;
 	}
 
+	@ManyToOne
 	public Sondages getSondage() {
 		return sondage;
 	}
@@ -56,6 +45,7 @@ public class ListeReponse {
 		this.sondage = sondage;
 	}
 
+	@OneToMany(mappedBy="reponsequestion")
 	public Collection<Reponse> getReponses() {
 		return reponses;
 	}

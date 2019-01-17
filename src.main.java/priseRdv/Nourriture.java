@@ -7,25 +7,30 @@ import javax.persistence.Id;
 @Entity
 public class Nourriture {
 
-	@Id 
-	@GeneratedValue
 	public int idAliment;
 	public String nomAliment;
 	
-	public Nourriture() {
-		
+	public Nourriture(String nomAliment) {
+		this.nomAliment = nomAliment;
 	}
+	
+	@Id 
+	@GeneratedValue
 	public int getIdAliment() {
 		return idAliment;
 	}
-	public void setIdAliment(int idAliment) {
-		this.idAliment = idAliment;
-	}
+	
 	public String getNomAliment() {
 		return nomAliment;
 	}
+	
 	public void setNomAliment(String nomAliment) {
 		this.nomAliment = nomAliment;
+	}
+
+	@Override
+	public String toString() {
+		return "Nourriture [idAliment=" + idAliment + ", nomAliment=" + nomAliment + "]";
 	}
 	
 }

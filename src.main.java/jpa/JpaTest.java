@@ -41,7 +41,7 @@ public class JpaTest {
 		int numOfParticipant = manager.createQuery("Select p From Participant as p", Participant.class).getResultList().size();
 		if (numOfParticipant == 0) {
 			manager.persist(new Participant("Guessant", "Thomas", "dfghjk@dfgh.fr"));
-			manager.persist(new Participant("Captain", "Nemo", "sdfghjuk@,ndhfyhnf.fr"));
+			manager.persist(new Participant("Captain", "Nemo", "sdfghjuk@ndhfyhnf.fr"));
 		}
 	}
 

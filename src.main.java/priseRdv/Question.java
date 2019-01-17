@@ -12,28 +12,19 @@ import javax.persistence.OneToMany;
 @Entity
 public class Question {
 	
+	private long id;
+	private String enonce;
+	private boolean multiple;
+	private Collection<Sondages> questionnaires;
+	private Collection<ReponsePossible> reponsepossibles;
+
 	@Id
 	@GeneratedValue
-	long id;
-	
-	@Column(length=2048)
-	String enonce;
-	boolean multiple;
-	
-	@ManyToMany(mappedBy="questions")
-	Collection<Sondages> questionnaires;
-	
-	@OneToMany(mappedBy="question")
-	Collection<ReponsePossible> reponsepossibles;
-
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
+	@Column(length=2048)
 	public String getEnonce() {
 		return enonce;
 	}
@@ -50,6 +41,7 @@ public class Question {
 		this.multiple = multiple;
 	}
 
+	@ManyToMany(mappedBy="questions")
 	public Collection<Sondages> getQuestionnaires() {
 		return questionnaires;
 	}
@@ -58,6 +50,7 @@ public class Question {
 		this.questionnaires = questionnaires;
 	}
 
+	@OneToMany(mappedBy="question")
 	public Collection<ReponsePossible> getReponsepossibles() {
 		return reponsepossibles;
 	}
