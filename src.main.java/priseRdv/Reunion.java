@@ -10,4 +10,6 @@ public class Reunion {
 	int id;
 	
 	String intitule, resume, lieu, clearCode;
+	
+	boolean pause;
 }
