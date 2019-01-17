@@ -10,51 +10,42 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class ReponsePossible {
-	
-	@Id
-	@GeneratedValue
 	long id;
-	
 	boolean correct;
-	
-	@ManyToOne
 	Question question;
-	
-	@ManyToMany(mappedBy="reponsespossibles")
 	Collection<Reponse> reponse;
-	
-	public ReponsePossible() {
+	private ReponsePossible() {
 	}
 
-	public long getId() {
+	@Id
+	@GeneratedValue
+	private long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public boolean isCorrect() {
+	private boolean isCorrect() {
 		return correct;
 	}
 
-	public void setCorrect(boolean correct) {
+	private void setCorrect(boolean correct) {
 		this.correct = correct;
 	}
 
-	public Question getQuestion() {
+	@ManyToOne
+	private Question getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(Question question) {
+	private void setQuestion(Question question) {
 		this.question = question;
 	}
 
-	public Collection<Reponse> getReponse() {
+	@ManyToMany(mappedBy = "reponsespossibles")
+	private Collection<Reponse> getReponse() {
 		return reponse;
 	}
 
-	public void setReponse(Collection<Reponse> reponse) {
+	private void setReponse(Collection<Reponse> reponse) {
 		this.reponse = reponse;
 	}
 
@@ -63,6 +54,5 @@ public class ReponsePossible {
 		return "ReponsePossible [id=" + id + ", correct=" + correct + ", question=" + question + ", reponse=" + reponse
 				+ "]";
 	}
-	
-	
+
 }

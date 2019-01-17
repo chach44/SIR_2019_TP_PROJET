@@ -13,92 +13,84 @@ import javax.persistence.Entity;
 @Entity
 public class Reunion {
 
-	@Id 
-	@GeneratedValue
 	int id;
-	
 	String intitule, resume, lieu, clearCode;
-	
 	boolean pause;
-	
-	@ManyToMany
 	Collection<Participant> ParticipantPresent;
-	
-	@ManyToMany
 	Collection<Participant> ParticipantAbsent;
-	
-	@ManyToOne
 	Sondages s;
 
-	public int getId() {
+	@Id 
+	@GeneratedValue
+	private int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	private void setId(int id) {
 		this.id = id;
 	}
 
-	public String getIntitule() {
+	private String getIntitule() {
 		return intitule;
 	}
 
-	public void setIntitule(String intitule) {
+	private void setIntitule(String intitule) {
 		this.intitule = intitule;
 	}
 
-	public String getResume() {
+	private String getResume() {
 		return resume;
 	}
 
-	public void setResume(String resume) {
+	private void setResume(String resume) {
 		this.resume = resume;
 	}
 
-	public String getLieu() {
+	private String getLieu() {
 		return lieu;
 	}
 
-	public void setLieu(String lieu) {
+	private void setLieu(String lieu) {
 		this.lieu = lieu;
 	}
 
-	public String getClearCode() {
+	private String getClearCode() {
 		return clearCode;
 	}
 
-	public void setClearCode(String clearCode) {
+	private void setClearCode(String clearCode) {
 		this.clearCode = clearCode;
 	}
 
-	public boolean isPause() {
+	private boolean isPause() {
 		return pause;
 	}
 
-	public void setPause(boolean pause) {
+	private void setPause(boolean pause) {
 		this.pause = pause;
 	}
-
-	public Collection<Participant> getParticipantPresent() {
+	@ManyToMany(mappedBy="ParticipantPresent")
+	private Collection<Participant> getParticipantPresent() {
 		return ParticipantPresent;
 	}
 
-	public void setParticipantPresent(Collection<Participant> participantPresent) {
+	private void setParticipantPresent(Collection<Participant> participantPresent) {
 		ParticipantPresent = participantPresent;
 	}
-
-	public Collection<Participant> getParticipantAbsent() {
+	@ManyToMany(mappedBy="ParticipantAbsent")
+	private Collection<Participant> getParticipantAbsent() {
 		return ParticipantAbsent;
 	}
 
-	public void setParticipantAbsent(Collection<Participant> participantAbsent) {
+	private void setParticipantAbsent(Collection<Participant> participantAbsent) {
 		ParticipantAbsent = participantAbsent;
 	}
-
-	public Sondages getS() {
+	@ManyToOne
+	private Sondages getS() {
 		return s;
 	}
 
-	public void setS(Sondages s) {
+	private void setS(Sondages s) {
 		this.s = s;
 	}
 	
