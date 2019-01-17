@@ -21,6 +21,12 @@ public class Participant {
 	public Participant() {
 	}
 
+	public Participant(String name, String firstname, String email) {
+		this.name = name;
+		this.firstname = firstname;
+		this.email = email;
+	}
+
 	public String getName() {
 		return name;
 	}
