@@ -11,6 +11,10 @@ public class Nourriture {
 	@GeneratedValue
 	public int idAliment;
 	public String nomAliment;
+	
+	public Nourriture() {
+		
+	}
 	public int getIdAliment() {
 		return idAliment;
 	}
