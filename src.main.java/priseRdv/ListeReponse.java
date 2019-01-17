@@ -27,7 +27,7 @@ public class ListeReponse {
 	Participant participant;
 
 	@ManyToOne
-	Sondage sondage;
+	Sondages sondage;
 
 	@OneToMany(mappedBy="reponsequestion")
 	Collection<Reponse> reponses;
@@ -48,11 +48,11 @@ public class ListeReponse {
 		this.participant = participant;
 	}
 
-	public Sondage getSondage() {
+	public Sondages getSondage() {
 		return sondage;
 	}
 
-	public void setSondage(Sondage sondage) {
+	public void setSondage(Sondages sondage) {
 		this.sondage = sondage;
 	}
 

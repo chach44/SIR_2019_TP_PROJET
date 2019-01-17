@@ -21,7 +21,7 @@ public class Question {
 	boolean multiple;
 	
 	@ManyToMany(mappedBy="questions")
-	Collection<Sondage> questionnaires;
+	Collection<Sondages> questionnaires;
 	
 	@OneToMany(mappedBy="question")
 	Collection<ReponsePossible> reponsepossibles;
@@ -50,11 +50,11 @@ public class Question {
 		this.multiple = multiple;
 	}
 
-	public Collection<Sondage> getQuestionnaires() {
+	public Collection<Sondages> getQuestionnaires() {
 		return questionnaires;
 	}
 
-	public void setQuestionnaires(Collection<Sondage> questionnaires) {
+	public void setQuestionnaires(Collection<Sondages> questionnaires) {
 		this.questionnaires = questionnaires;
 	}
 
