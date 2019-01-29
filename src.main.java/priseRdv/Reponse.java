@@ -14,43 +14,44 @@ import javax.persistence.TemporalType;
 @Entity
 public class Reponse {
 	
-
-	long id;
-	Date datereponse;
-	ListeReponse reponsequestion;
-	
-	Collection<ReponsePossible> reponsespossibles;
+	private long id;
+	private Date datereponse;
+	private ListeReponse reponsequestion;
+	private Collection<ReponsePossible> reponsespossibles;
 
 	public Reponse() {
 	}
+	
 	@Id
 	@GeneratedValue
-	private long getId() {
+	public long getId() {
 		return id;
 	}
 
 	@Temporal(TemporalType.DATE)
-	private Date getDatereponse() {
+	public Date getDatereponse() {
 		return datereponse;
 	}
 
-	private void setDatereponse(Date datereponse) {
+	public void setDatereponse(Date datereponse) {
 		this.datereponse = datereponse;
 	}
+	
 	@ManyToOne
-	private ListeReponse getReponsequestion() {
+	public ListeReponse getReponsequestion() {
 		return reponsequestion;
 	}
 
-	private void setReponsequestion(ListeReponse reponsequestion) {
+	public void setReponsequestion(ListeReponse reponsequestion) {
 		this.reponsequestion = reponsequestion;
 	}
+	
 	@ManyToMany
-	private Collection<ReponsePossible> getReponsespossibles() {
+	public Collection<ReponsePossible> getReponsespossibles() {
 		return reponsespossibles;
 	}
 
-	private void setReponsespossibles(Collection<ReponsePossible> reponsespossibles) {
+	public void setReponsespossibles(Collection<ReponsePossible> reponsespossibles) {
 		this.reponsespossibles = reponsespossibles;
 	}
 

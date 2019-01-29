@@ -9,58 +9,56 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-
-
 @Entity
 public class Sondages {
-	
 
-	long id;
-	Participant createurSondage;
-	String titre, theme;
-	Collection<Question> questions;
-	Collection<ListeReponse> reponses;
-	
-	Reunion r;
+	private long id;
+	private Participant createurSondage;
+	private String titre, theme;
+	private Collection<Question> questions;
+	private Collection<ListeReponse> reponses;
+	private Reunion reunion;
 
 	public Sondages() {
 	}
 
 	@Id
 	@GeneratedValue
-	private long getId() {
+	public long getId() {
 		return id;
 	}
 
-	private String getTitre() {
+	public String getTitre() {
 		return titre;
 	}
 
-	private void setTitre(String titre) {
+	public void setTitre(String titre) {
 		this.titre = titre;
 	}
 
-	private String getTheme() {
+	public String getTheme() {
 		return theme;
 	}
 
-	private void setTheme(String theme) {
+	public void setTheme(String theme) {
 		this.theme = theme;
 	}
+	
 	@ManyToMany
-	private Collection<Question> getQuestions() {
+	public Collection<Question> getQuestions() {
 		return questions;
 	}
 
-	private void setQuestions(Collection<Question> questions) {
+	public void setQuestions(Collection<Question> questions) {
 		this.questions = questions;
 	}
+	
 	@OneToMany(mappedBy="question")
-	private Collection<ListeReponse> getReponses() {
+	public Collection<ListeReponse> getReponses() {
 		return reponses;
 	}
 
-	private void setReponses(Collection<ListeReponse> reponses) {
+	public void setReponses(Collection<ListeReponse> reponses) {
 		this.reponses = reponses;
 	}
 
@@ -75,16 +73,17 @@ public class Sondages {
 		return createurSondage;
 	}
 
-	private void setCreateurSondage(Participant createurSondage) {
+	public void setCreateurSondage(Participant createurSondage) {
 		this.createurSondage = createurSondage;
 	}
+	
 	@OneToOne
-	private Reunion getR() {
-		return r;
+	public Reunion getR() {
+		return reunion;
 	}
 
-	private void setR(Reunion r) {
-		this.r = r;
+	public void setR(Reunion r) {
+		this.reunion = r;
 	}
 	
 	
