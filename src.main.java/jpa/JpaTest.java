@@ -43,11 +43,11 @@ public class JpaTest {
 		}
 	}
 
-	private void listEmployees() {
+	private void listParticipants() {
 		List<Participant> resultList = manager.createQuery("Select p From Participant as p", Participant.class).getResultList();
-		System.out.println("num of participant:" + resultList.size());
+		System.out.println("nombre de participant:" + resultList.size());
 		for (Participant next : resultList) {
-			System.out.println("next participant: " + next);
+			System.out.println("Le participant: " + next);
 		}
 	}
 
