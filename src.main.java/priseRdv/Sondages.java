@@ -8,9 +8,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import org.hibernate.metamodel.binding.CascadeType;
-
+import javax.persistence.CascadeType;
 @Entity
 public class Sondages {
 
@@ -21,13 +19,19 @@ public class Sondages {
 	private Collection<ListeReponse> reponses;
 	private Reunion reunion;
 
-	public Sondages() {
+	public Sondages(String theme,Collection<Question> listeQuestions) {
+		this.theme = theme;
+		questions = listeQuestions;
 	}
 
 	@Id
 	@GeneratedValue
 	public long getId() {
 		return id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getTitre() {
@@ -55,7 +59,11 @@ public class Sondages {
 		this.questions = questions;
 	}
 	
-	@OneToMany(mappedBy="question", cascade = CascadeType.PERSIST)
+	public void addQuestion(Question questions) {
+		this.questions.add(questions);
+	}
+	
+	@ManyToMany
 	public Collection<ListeReponse> getReponses() {
 		return reponses;
 	}

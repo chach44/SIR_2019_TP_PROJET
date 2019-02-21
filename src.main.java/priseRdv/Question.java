@@ -15,13 +15,25 @@ public class Question {
 	private long id;
 	private String enonce;
 	private boolean multiple;
-	private Collection<Sondages> questionnaires;
 	private Collection<ReponsePossible> reponsepossibles;
 
+	public Question(String enonce, boolean multiple ) {
+		this.enonce =  enonce;
+		this.multiple = multiple;
+	}
+	
+	public Question( ) {
+		
+	}
+	
 	@Id
 	@GeneratedValue
 	public long getId() {
 		return id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	@Column(length=2048)
@@ -41,16 +53,8 @@ public class Question {
 		this.multiple = multiple;
 	}
 
-	@ManyToMany(mappedBy="questions")
-	public Collection<Sondages> getQuestionnaires() {
-		return questionnaires;
-	}
 
-	public void setQuestionnaires(Collection<Sondages> questionnaires) {
-		this.questionnaires = questionnaires;
-	}
-
-	@OneToMany(mappedBy="question")
+	@OneToMany
 	public Collection<ReponsePossible> getReponsepossibles() {
 		return reponsepossibles;
 	}
@@ -59,10 +63,13 @@ public class Question {
 		this.reponsepossibles = reponsepossibles;
 	}
 
+	public void addReponsePossible(ReponsePossible reponseP) {
+		this.reponsepossibles.add(reponseP);
+	}
+	
 	@Override
 	public String toString() {
-		return "Question [id=" + id + ", enonce=" + enonce + ", multiple=" + multiple + ", questionnaires="
-				+ questionnaires + ", reponsepossibles=" + reponsepossibles + "]";
+		return "Question [id=" + id + ", enonce=" + enonce + ", multiple=" + multiple + ", reponsepossibles=" + reponsepossibles + "]";
 	}
 	
 }

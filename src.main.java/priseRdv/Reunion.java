@@ -4,7 +4,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -15,14 +18,19 @@ public class Reunion {
 	private int id;
 	private String intitule, resume, lieu, clearCode;
 	private boolean pause;
-	private Collection<Participant> ParticipantPresent;
 	private Collection<Participant> ParticipantAbsent;
-	private Sondages s;
+	private Collection<Participant> ParticipantPresent;
+	private Sondages leSondage;
 
-	@Id 
+	@Id
 	@GeneratedValue
 	public int getId() {
 		return id;
+	}
+
+	public Reunion() {
+		this.ParticipantAbsent = new ArrayList<Participant>();
+		this.ParticipantPresent = new ArrayList<Participant>();
 	}
 
 	public void setId(int id) {
@@ -68,8 +76,8 @@ public class Reunion {
 	public void setPause(boolean pause) {
 		this.pause = pause;
 	}
-	
-	@ManyToMany(mappedBy="ParticipantPresent")
+
+	@ManyToMany
 	public Collection<Participant> getParticipantPresent() {
 		return ParticipantPresent;
 	}
@@ -77,8 +85,8 @@ public class Reunion {
 	public void setParticipantPresent(Collection<Participant> participantPresent) {
 		ParticipantPresent = participantPresent;
 	}
-	
-	@ManyToMany(mappedBy="ParticipantAbsent")
+
+	@ManyToMany
 	public Collection<Participant> getParticipantAbsent() {
 		return ParticipantAbsent;
 	}
@@ -87,13 +95,21 @@ public class Reunion {
 		ParticipantAbsent = participantAbsent;
 	}
 	
-	@ManyToOne
-	public Sondages getS() {
-		return s;
+	public void addParticipantAbsent(Participant participantAbsent) {
+		ParticipantAbsent.add(participantAbsent);
 	}
 
-	public void setS(Sondages s) {
-		this.s = s;
+	public void addParticipantPresent(Participant participantPresent) {
+		ParticipantPresent.add(participantPresent);
 	}
-	
+
+	@OneToOne
+	public Sondages getleSondage() {
+		return leSondage;
+	}
+
+	public void setleSondage(Sondages sondage) {
+		this.leSondage = sondage;
+	}
+
 }

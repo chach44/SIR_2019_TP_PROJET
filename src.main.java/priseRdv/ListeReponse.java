@@ -27,6 +27,10 @@ public class ListeReponse {
 		return id;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 	@ManyToOne
 	public Participant getParticipant() {
 		return participant;
@@ -45,7 +49,7 @@ public class ListeReponse {
 		this.sondage = sondage;
 	}
 
-	@OneToMany(mappedBy="reponsequestion")
+	@OneToMany
 	public Collection<Reponse> getReponses() {
 		return reponses;
 	}
@@ -54,6 +58,10 @@ public class ListeReponse {
 		this.reponses = reponses;
 	}
 
+	public void addReponse(Reponse reponses) {
+		this.reponses.add(reponses);
+	}
+	
 	@Override
 	public String toString() {
 		return "ListeReponse [id=" + id + ", participant=" + participant + ", sondage=" + sondage + ", reponses="

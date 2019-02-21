@@ -25,6 +25,10 @@ public class ReponsePossible {
 		return id;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 	public boolean isCorrect() {
 		return correct;
 	}
@@ -42,7 +46,7 @@ public class ReponsePossible {
 		this.question = question;
 	}
 
-	@ManyToMany(mappedBy = "reponsespossibles")
+	@ManyToMany
 	public Collection<Reponse> getReponse() {
 		return reponse;
 	}

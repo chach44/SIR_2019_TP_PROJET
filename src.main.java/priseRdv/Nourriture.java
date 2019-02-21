@@ -20,6 +20,10 @@ public class Nourriture {
 		return idAliment;
 	}
 	
+	public void setIdAliment(int idAliment) {
+		this.idAliment = idAliment;
+	}
+	
 	public String getNomAliment() {
 		return nomAliment;
 	}
