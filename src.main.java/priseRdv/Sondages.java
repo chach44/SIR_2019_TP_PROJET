@@ -8,6 +8,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import job.Reunion;
+
 import javax.persistence.CascadeType;
 @Entity
 public class Sondages {
@@ -93,8 +96,12 @@ public class Sondages {
 	}
 
 	public void setR(Reunion r) {
+		if (reunion.getleSondage() != null) {
+			reunion.setleSondage(null);
+		}
+		
 		this.reunion = r;
+		reunion.setleSondage(this);
 	}
-	
 	
 }
