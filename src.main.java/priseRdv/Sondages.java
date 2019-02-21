@@ -96,9 +96,6 @@ public class Sondages {
 	}
 
 	public void setR(Reunion r) {
-		if (reunion.getleSondage() != null) {
-			reunion.setleSondage(null);
-		}
 		
 		this.reunion = r;
 		reunion.setleSondage(this);

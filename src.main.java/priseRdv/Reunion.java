@@ -6,6 +6,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import job.Reunion;
 import job.Sondages;
 
 import java.awt.List;
@@ -111,12 +112,8 @@ public class Reunion {
 	}
 
 	public void setleSondage(Sondages sondage) {
-		 if (leSondage != null) {
-			 leSondage.setR(null);
-		 }
-		
-		this.leSondage = sondage;
-		 leSondage.setR(this);
-	}
 
+		this.leSondage = sondage;
+
+	}
 }
