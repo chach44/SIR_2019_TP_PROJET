@@ -13,9 +13,7 @@ public class JpaTest {
 	public JpaTest(EntityManager manager) {
 		this.manager = manager;
 	}
-	/**
-	 * @param args
-	 */
+	
 	public static void main(String[] args) {
 		EntityManagerFactory factory =   
 				Persistence.createEntityManagerFactory("manager");

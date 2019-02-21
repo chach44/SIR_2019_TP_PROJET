@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.metamodel.binding.CascadeType;
+
 @Entity
 public class Sondages {
 
@@ -53,7 +55,7 @@ public class Sondages {
 		this.questions = questions;
 	}
 	
-	@OneToMany(mappedBy="question")
+	@OneToMany(mappedBy="question", cascade = CascadeType.PERSIST)
 	public Collection<ListeReponse> getReponses() {
 		return reponses;
 	}
