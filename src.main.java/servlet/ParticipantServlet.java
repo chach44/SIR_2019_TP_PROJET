@@ -29,15 +29,30 @@ public class ParticipantServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         // TODO Auto-generated method stub
-
+    	
+    	resp.setContentType("text/html");
         
        Participant p = new Participant(req.getParameter("name"), req.getParameter("firstname"), req.getParameter("email"));
         
-       PrintWriter print = new PrintWriter(resp.getOutputStream());
-       print.print("Felicitation,"+p.getFirstname()+ " "+p.getName()+ " vous etes inscrit");
-       print.print("Vous pouvez participer au sondage ");
+       PrintWriter out = resp.getWriter();
        
-       print.flush();
+       out.println("<HTML>\n<BODY>\n" +
+               "<H1>Recapitulatif des informations</H1>\n" +
+               "<UL>\n" +            
+       " <LI>Nom: "
+               + req.getParameter("name") + "\n" +
+               " <LI>Prenom: "
+               + req.getParameter("firstname") + "\n" +
+               " <LI>Age: "
+               + req.getParameter("email") + "\n" +
+               "</UL>\n" +                
+       "</BODY></HTML>");
+
+       
+//       print.print("Felicitation,"+p.getFirstname()+ " "+p.getName()+ " vous etes inscrit");
+//       print.print("Vous pouvez participer au sondage ");
+//       
+//       print.flush();
         
     }    
 }
