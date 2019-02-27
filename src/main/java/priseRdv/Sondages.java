@@ -24,6 +24,9 @@ public class Sondages {
 		this.theme = theme;
 		questions = listeQuestions;
 	}
+	public Sondages() {
+		
+	}
 
 	@Id
 	@GeneratedValue
