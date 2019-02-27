@@ -41,7 +41,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-servlet</artifactId>
 			<version>1.18.3</version>
@@ -51,7 +51,7 @@
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
 			<version>1.18.3</version>
-		</dependency>-->
+		</dependency>
 
 	</dependencies>
 
