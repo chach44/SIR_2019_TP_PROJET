@@ -6,7 +6,8 @@
 	<groupId>test</groupId>
 	<artifactId>testjpa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>war
+</packaging>
 
 	<dependencies>
 		<dependency>
@@ -33,14 +34,14 @@
 		<!-- <dependency> <groupId>org.springframework.data</groupId> <artifactId>spring-data-jpa</artifactId> 
 			<version>1.9.0.RELEASE</version> </dependency> -->
 
-		<dependency>
+			<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-servlet</artifactId>
 			<version>1.18.3</version>
@@ -50,7 +51,7 @@
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
 			<version>1.18.3</version>
-		</dependency>
+		</dependency>-->
 
 	</dependencies>
 
@@ -63,6 +64,7 @@
 				<version>2.2</version>
 				<configuration>
 					<path>/</path>
+					<port>8080</port>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -11,7 +11,7 @@ import priseRdv.Participant;
 import priseRdv.Question;
 import priseRdv.Sondages;
 
-@Path("/hello")
+@Path("/sondage")
 public class SampleWebService {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -20,7 +20,7 @@ public class SampleWebService {
     }
     
     @GET
-    @Path("/home")
+    @Path("/sondage")
     @Produces(MediaType.APPLICATION_JSON)
     public Sondages getSondage() {
     	Sondages sondage = new Sondages();

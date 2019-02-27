@@ -30,9 +30,9 @@ public class ParticipantServlet extends HttpServlet {
             throws ServletException, IOException {
         // TODO Auto-generated method stub
     	
-    	resp.setContentType("text/html");
+    	//resp.setContentType("text/html");
         
-       Participant p = new Participant(req.getParameter("name"), req.getParameter("firstname"), req.getParameter("email"));
+   //    Participant p = new Participant(req.getParameter("name"), req.getParameter("firstname"), req.getParameter("email"));
         
        PrintWriter out = resp.getWriter();
        
