@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import Participant;
+import priseRdv.Participant;
 import priseRdv.Question;
 import priseRdv.Reunion;
 import priseRdv.Sondages;
