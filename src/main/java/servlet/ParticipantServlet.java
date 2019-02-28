@@ -16,12 +16,38 @@ urlPatterns={"/Participant"})
 public class ParticipantServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             
-        PrintWriter p = new PrintWriter(resp.getOutputStream());
-        p.print("Participant");
-        p.flush();
+    	 PrintWriter out = resp.getWriter();
+    	 int i = 1;
+  	 
+    	 //Exemple de lien participant
+    	    out.println("<HTML>\n<BODY>\n" +
+    	                "<H1>Participant</H1>\n" + 
+    	                "<FORM Method=\"POST\" Action=\"/Participant\">"+
+    	                "<table>" +
+ 		               "<thead>"+
+ 			               "<tr>"+
+ 			               	   "<th colspan=\"1\">Nom \\ Date</th>"+
+ 			                   "<th colspan=\"1\">22/12/19</th>"+
+ 			                   "<th colspan=\"1\">23/12/19</th>"+
+ 			                   "<th colspan=\"1\">24/12/19</th>"+
+ 			                   "<th colspan=\"1\">25/12/19</th>"+
+ 			               "</tr>"+
+ 		               "</thead>"+
+ 		               "<tbody>"+
+ 			               "<tr>"+
+ 			                   "<td><INPUT type=text size=20 name=nom_prenom></td>"+
+ 			                   "<td><input type=\"checkbox\" id=\"date1\"></td>"+
+ 			                   "<td><input type=\"checkbox\" id=\"date2\"></td>"+
+ 			                   "<td><input type=\"checkbox\" id=\"date3\"></td>"+
+ 			                   "<td><input type=\"checkbox\" id=\"date4\"></td>"+
+ 			                   "<td><INPUT type=submit value=Send></td>"+
+ 			               "</tr>"+
+ 			           "</tbody>"+
+ 				       "</table>" +
+						"</FORM>  "      +
+			    	    "</BODY></HTML>");
         
     }
 
@@ -37,22 +63,10 @@ public class ParticipantServlet extends HttpServlet {
        PrintWriter out = resp.getWriter();
        
        out.println("<HTML>\n<BODY>\n" +
-	               "<H1>Recapitulatif des informations</H1>\n" +
-	               "<UL>\n" +            
-	               " <LI>Nom: "
-	               + req.getParameter("name") + "\n" +
-	               " <LI>Prenom: "
-	               + req.getParameter("firstname") + "\n" +
-	               " <LI>Age: "
-	               + req.getParameter("email") + "\n" +
-	               "</UL>\n" +                
-    		  		"</BODY></HTML>");
+	               "<H1>Reponse au sondage :</H1>\n" +
+	               req.getParameter("nom_prenom")+" a repondu !"+
+    		  	   "</BODY></HTML>");
 
-       
-//       print.print("Felicitation,"+p.getFirstname()+ " "+p.getName()+ " vous etes inscrit");
-//       print.print("Vous pouvez participer au sondage ");
-//       
-//       print.flush();
         
     }    
 }

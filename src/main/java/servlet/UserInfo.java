@@ -21,9 +21,9 @@ public class UserInfo extends HttpServlet {
   	 
     	    out.println("<HTML>\n<BODY>\n" +
     	                "<H1>User</H1>\n" + 
-						"Nom : toto"    + //aller chercher le nom en base
-						"Prenom : toto"    + //aller chercher le prenom en base
-						"Mail : toto.toto@gmail.com"    + //idem
+						"Nom : toto <BR>"    + //aller chercher le nom en base
+						"Prenom : toto <BR>"    + //aller chercher le prenom en base
+						"Mail : toto.toto@gmail.com <BR>"    + //idem
 			    	    "</BODY></HTML>");
         
     }

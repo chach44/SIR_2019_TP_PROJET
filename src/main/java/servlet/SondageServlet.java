@@ -22,7 +22,7 @@ public class SondageServlet extends HttpServlet {
     	    out.println("<HTML>\n<BODY>\n" +
     	                "<H1>Sondage</H1>\n" + 
 						"<FORM Method=\"POST\" Action=\"/Sondage\">"+
-						"Question :         <INPUT type=text size=20 name=question"+i+"><BR>"+
+						"Question :         <INPUT type=text size=70 name=question"+i+"><BR>"+
 						"<INPUT type=button value=Ajouter size=20 name=add><BR>"+
 						"<INPUT type=hidden value="+i+" name=i><BR>"+
 						"<INPUT type=submit value=Send>"+
