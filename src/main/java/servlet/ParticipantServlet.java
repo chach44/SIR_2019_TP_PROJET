@@ -37,16 +37,16 @@ public class ParticipantServlet extends HttpServlet {
        PrintWriter out = resp.getWriter();
        
        out.println("<HTML>\n<BODY>\n" +
-               "<H1>Recapitulatif des informations</H1>\n" +
-               "<UL>\n" +            
-       " <LI>Nom: "
-               + req.getParameter("name") + "\n" +
-               " <LI>Prenom: "
-               + req.getParameter("firstname") + "\n" +
-               " <LI>Age: "
-               + req.getParameter("email") + "\n" +
-               "</UL>\n" +                
-       "</BODY></HTML>");
+	               "<H1>Recapitulatif des informations</H1>\n" +
+	               "<UL>\n" +            
+	               " <LI>Nom: "
+	               + req.getParameter("name") + "\n" +
+	               " <LI>Prenom: "
+	               + req.getParameter("firstname") + "\n" +
+	               " <LI>Age: "
+	               + req.getParameter("email") + "\n" +
+	               "</UL>\n" +                
+    		  		"</BODY></HTML>");
 
        
 //       print.print("Felicitation,"+p.getFirstname()+ " "+p.getName()+ " vous etes inscrit");

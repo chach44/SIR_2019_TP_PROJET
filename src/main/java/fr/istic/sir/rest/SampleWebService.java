@@ -11,7 +11,7 @@ import priseRdv.Participant;
 import priseRdv.Question;
 import priseRdv.Sondages;
 
-@Path("/sondage")
+@Path("/hello")
 public class SampleWebService {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -20,7 +20,7 @@ public class SampleWebService {
     }
     
     @GET
-    @Path("/sondage")
+    @Path("/home")
     @Produces(MediaType.APPLICATION_JSON)
     public Sondages getSondage() {
     	Sondages sondage = new Sondages();
@@ -31,7 +31,7 @@ public class SampleWebService {
         q1.setEnonce("Aime tu le veau ?");
         questions.add(q1);
         Question q2 = new Question();
-        q2.setEnonce("As tu bien goutÃ© ?");
+        q2.setEnonce("As tu bien gouté ?");
         questions.add(q2);
         
         sondage.setQuestions(questions);
