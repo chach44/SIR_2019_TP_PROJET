@@ -58,8 +58,9 @@ public class ParticipantServlet extends HttpServlet {
     	
     	//resp.setContentType("text/html");
         
-   //    Participant p = new Participant(req.getParameter("name"), req.getParameter("firstname"), req.getParameter("email"));
+    	//Participant p = new Participant(req.getParameter("name"), req.getParameter("firstname"), req.getParameter("email"));
         
+    	//mettre les reponses en base 
        PrintWriter out = resp.getWriter();
        
        out.println("<HTML>\n<BODY>\n" +
