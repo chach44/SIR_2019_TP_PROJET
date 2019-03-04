@@ -34,7 +34,7 @@ public class Nourriture {
 
 	@Override
 	public String toString() {
-		return "Nourriture [idAliment=" + idAliment + ", nomAliment=" + nomAliment + "]";
+		return "Nourriture [id aliment=" + idAliment + ", nom aliment=" + nomAliment + "]";
 	}
 	
 }

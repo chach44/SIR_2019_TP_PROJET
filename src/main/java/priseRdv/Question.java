@@ -16,7 +16,8 @@ public class Question {
 	private String enonce;
 	private boolean multiple;
 	private Collection<ReponsePossible> reponsepossibles;
-
+private Collection<Sondages> lesSondages;
+	
 	public Question(String enonce, boolean multiple ) {
 		this.enonce =  enonce;
 		this.multiple = multiple;
@@ -54,7 +55,7 @@ public class Question {
 	}
 
 
-	@OneToMany
+	@OneToMany(mappedBy="question")
 	public Collection<ReponsePossible> getReponsepossibles() {
 		return reponsepossibles;
 	}
@@ -67,9 +68,23 @@ public class Question {
 		this.reponsepossibles.add(reponseP);
 	}
 	
+	public Collection<Sondages> getLesSondages() {
+		return lesSondages;
+	}
+
+	public void setLesSondages(Collection<Sondages> lesSondages) {
+		this.lesSondages = lesSondages;
+	}
+	
+	public void addSondages(Sondages lesondage) {
+		lesSondages.add(lesondage);
+	}
+	
 	@Override
 	public String toString() {
 		return "Question [id=" + id + ", enonce=" + enonce + ", multiple=" + multiple + ", reponsepossibles=" + reponsepossibles + "]";
 	}
+
+
 	
 }

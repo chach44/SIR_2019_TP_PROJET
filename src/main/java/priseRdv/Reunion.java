@@ -77,7 +77,7 @@ public class Reunion {
 		this.pause = pause;
 	}
 
-	@ManyToMany
+	@ManyToMany(mappedBy="reunion")
 	public Collection<Participant> getParticipantPresent() {
 		return ParticipantPresent;
 	}
@@ -86,7 +86,7 @@ public class Reunion {
 		ParticipantPresent = participantPresent;
 	}
 
-	@ManyToMany
+	@ManyToMany(mappedBy="reunion")
 	public Collection<Participant> getParticipantAbsent() {
 		return ParticipantAbsent;
 	}
@@ -103,7 +103,7 @@ public class Reunion {
 		ParticipantPresent.add(participantPresent);
 	}
 
-	@OneToOne
+	@OneToOne(mappedBy="reunion")
 	public Sondages getleSondage() {
 		return leSondage;
 	}

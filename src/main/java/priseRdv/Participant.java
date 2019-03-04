@@ -13,7 +13,8 @@ public class Participant {
 	private String name, firstname, email;
 	private Collection<Nourriture> lesAllergies;
 	private Collection<Nourriture> lesPreferences;
-
+	private Collection<Sondages> lesSondagesCreer;
+	
 	public Participant(String name, String firstname, String email) {
 		this.name = name;
 		this.firstname = firstname;
@@ -72,10 +73,20 @@ public class Participant {
 	public Collection<Nourriture> getLesPreferences(){
 		return lesPreferences;
 	}
+	@OneToMany
+	public Collection<Sondages> getLesSondagesCreer() {
+		return lesSondagesCreer;
+	}
+
+	public void setLesSondagesCreer(Collection<Sondages> lesSondagesCreer) {
+		this.lesSondagesCreer = lesSondagesCreer;
+	}
+
 	
 	@Override
 	public String toString() {
 		return "Participant [name=" + name + ", firstname=" + firstname + ", email=" + email ;
 	}
+
 
 }
