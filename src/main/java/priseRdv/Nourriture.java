@@ -32,9 +32,5 @@ public class Nourriture {
 		this.nomAliment = nomAliment;
 	}
 
-	@Override
-	public String toString() {
-		return "Nourriture [id aliment=" + idAliment + ", nom aliment=" + nomAliment + "]";
-	}
-	
+
 }

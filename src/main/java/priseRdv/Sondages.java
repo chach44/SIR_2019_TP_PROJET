@@ -19,6 +19,7 @@ public class Sondages {
 	private Collection<Question> questions;
 	private Collection<ListeReponse> reponses;
 	private Reunion reunion;
+	private String urlPAD;
 
 	public Sondages(String theme,Collection<Question> listeQuestions) {
 		this.theme = theme;
@@ -67,7 +68,7 @@ public class Sondages {
 		this.questions.add(questions);
 	}
 	
-	@ManyToMany
+	@OneToMany(mappedBy="sondage")
 	public Collection<ListeReponse> getReponses() {
 		return reponses;
 	}
@@ -76,13 +77,7 @@ public class Sondages {
 		this.reponses = reponses;
 	}
 
-	@Override
-	public String toString() {
-		return "Sondage [id=" + id + ", titre=" + titre + ", theme=" + theme + ", questions=" + questions
-				+ ", reponses=" + reponses + "]";
-	}
-
-	@OneToOne
+	@ManyToOne
 	public Participant getCreateurSondage() {
 		return createurSondage;
 	}
@@ -92,14 +87,20 @@ public class Sondages {
 	}
 	
 	@OneToOne
-	public Reunion getR() {
+	public Reunion getreunion() {
 		return reunion;
 	}
 
-	public void setR(Reunion r) {
+	public void setreunion(Reunion r) {
 		
 		this.reunion = r;
 		reunion.setleSondage(this);
+	}
+	public String getUrlPAD() {
+		return urlPAD;
+	}
+	public void setUrlPAD(String urlPAD) {
+		this.urlPAD = urlPAD;
 	}
 	
 }

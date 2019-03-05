@@ -18,7 +18,7 @@ public class JpaTest {
 	}
 
 	public static void main(String[] args) {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("mysql");
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("dev");
 		EntityManager manager = factory.createEntityManager();
 		JpaTest test = new JpaTest(manager);
 
@@ -71,7 +71,7 @@ public class JpaTest {
 		Reunion unReunion = new Reunion();
 		manager.persist(unReunion);
 		Sondages unSondage = new Sondages("Sondage sur le theme..", LesQuestion);
-		unSondage.setR(unReunion);
+		unSondage.setreunion(unReunion);
 		manager.persist(unSondage);
 	}
 

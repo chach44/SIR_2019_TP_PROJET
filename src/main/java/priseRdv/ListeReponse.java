@@ -62,10 +62,4 @@ public class ListeReponse {
 		this.reponses.add(reponses);
 	}
 	
-	@Override
-	public String toString() {
-		return "ListeReponse [id=" + id + ", participant=" + participant + ", sondage=" + sondage + ", reponses="
-				+ reponses + "]";
-	}
-
 }

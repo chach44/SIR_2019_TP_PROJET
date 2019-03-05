@@ -5,10 +5,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Entity;
 
@@ -21,6 +24,7 @@ public class Reunion {
 	private Collection<Participant> ParticipantAbsent;
 	private Collection<Participant> ParticipantPresent;
 	private Sondages leSondage;
+	private Date dateReunion;
 
 	@Id
 	@GeneratedValue
@@ -77,7 +81,7 @@ public class Reunion {
 		this.pause = pause;
 	}
 
-	@ManyToMany(mappedBy="reunion")
+	@ManyToMany
 	public Collection<Participant> getParticipantPresent() {
 		return ParticipantPresent;
 	}
@@ -85,8 +89,8 @@ public class Reunion {
 	public void setParticipantPresent(Collection<Participant> participantPresent) {
 		ParticipantPresent = participantPresent;
 	}
-
-	@ManyToMany(mappedBy="reunion")
+	
+	@ManyToMany
 	public Collection<Participant> getParticipantAbsent() {
 		return ParticipantAbsent;
 	}
@@ -112,5 +116,13 @@ public class Reunion {
 
 		this.leSondage = sondage;
 
+	}
+	 @Temporal(TemporalType.DATE)
+	public Date getDateReunion() {
+		return dateReunion;
+	}
+
+	public void setDateReunion(Date dateReunion) {
+		this.dateReunion = dateReunion;
 	}
 }

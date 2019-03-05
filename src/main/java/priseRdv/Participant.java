@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-
+import javax.persistence.ManyToOne;
 @Entity
 public class Participant {
 
@@ -14,7 +14,8 @@ public class Participant {
 	private Collection<Nourriture> lesAllergies;
 	private Collection<Nourriture> lesPreferences;
 	private Collection<Sondages> lesSondagesCreer;
-	
+
+
 	public Participant(String name, String firstname, String email) {
 		this.name = name;
 		this.firstname = firstname;
@@ -53,27 +54,25 @@ public class Participant {
 	public void setLesAllergies(Collection<Nourriture> lesAllergies) {
 		this.lesAllergies = lesAllergies;
 	}
-	
+
 	public void setLesPreferences(Collection<Nourriture> lesPreferences) {
 		this.lesPreferences = lesPreferences;
 	}
-	
+
 	public void addAllergies(Nourriture allergies) {
 		lesAllergies.add(allergies);
 	}
-	
+
 	public void addPreferences(Nourriture preferences) {
 		lesPreferences.add(preferences);
 	}
-	@ManyToMany 
-	public Collection<Nourriture> getlesAllergies() {
-		return lesAllergies;
-	}
+
 	@ManyToMany
-	public Collection<Nourriture> getLesPreferences(){
+	public Collection<Nourriture> getLesPreferences() {
 		return lesPreferences;
 	}
-	@OneToMany
+
+	@OneToMany(mappedBy="createurSondage")
 	public Collection<Sondages> getLesSondagesCreer() {
 		return lesSondagesCreer;
 	}
@@ -82,11 +81,11 @@ public class Participant {
 		this.lesSondagesCreer = lesSondagesCreer;
 	}
 
-	
-	@Override
-	public String toString() {
-		return "Participant [name=" + name + ", firstname=" + firstname + ", email=" + email ;
-	}
 
+
+	@ManyToMany
+	public Collection<Nourriture> getLesAllergies() {
+		return lesAllergies;
+	}
 
 }

@@ -55,10 +55,6 @@ public class ReponsePossible {
 		this.reponse = reponse;
 	}
 
-	@Override
-	public String toString() {
-		return "ReponsePossible [id=" + id + ", correct=" + correct + ", question=" + question + ", reponse=" + reponse
-				+ "]";
-	}
+
 
 }

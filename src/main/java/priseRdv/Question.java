@@ -67,7 +67,7 @@ private Collection<Sondages> lesSondages;
 	public void addReponsePossible(ReponsePossible reponseP) {
 		this.reponsepossibles.add(reponseP);
 	}
-	
+	@ManyToMany(mappedBy="questions")
 	public Collection<Sondages> getLesSondages() {
 		return lesSondages;
 	}
@@ -79,11 +79,7 @@ private Collection<Sondages> lesSondages;
 	public void addSondages(Sondages lesondage) {
 		lesSondages.add(lesondage);
 	}
-	
-	@Override
-	public String toString() {
-		return "Question [id=" + id + ", enonce=" + enonce + ", multiple=" + multiple + ", reponsepossibles=" + reponsepossibles + "]";
-	}
+
 
 
 	
