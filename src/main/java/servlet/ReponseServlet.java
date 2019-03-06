@@ -16,7 +16,7 @@ public class ReponseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-            
+    	resp.setContentType("text/html");
         PrintWriter p = new PrintWriter(resp.getOutputStream());
         p.print("Reunion");
         p.flush();
