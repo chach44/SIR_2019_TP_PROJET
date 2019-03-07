@@ -1,12 +1,20 @@
 package priseRdv;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import jpa.EntityManagerHelper;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Nourriture.findAll",
+                query="SELECT n FROM Nourriture n")
+}) 
 public class Nourriture {
 
 	public int idAliment;
@@ -40,4 +48,8 @@ public class Nourriture {
 	managerHelper.getEntityManager().persist(n);
 	managerHelper.commit();
 }
+	public static List<Nourriture> getNourritureList() {
+		managerHelper.beginTransaction();
+		return	managerHelper.getEntityManager().createNamedQuery("Nourriture.findAll").getResultList();		 
+	}
 }
