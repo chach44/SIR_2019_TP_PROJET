@@ -88,9 +88,9 @@ static EntityManagerHelper managerHelper;
 	public void addSondages(Sondages lesondage) {
 		lesSondages.add(lesondage);
 	}
-	public static void sauvgarder() {
+	public static void sauvgarder(Question q) {
 	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist();
+	managerHelper.getEntityManager().persist(q);
 	managerHelper.commit();
 }
 

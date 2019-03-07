@@ -64,9 +64,9 @@ public class ListeReponse {
 	public void addReponse(Reponse reponses) {
 		this.reponses.add(reponses);
 	}
-	public static void sauvgarder() {
+	public static void sauvgarder(ListeReponse lRep) {
 	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist();
+	managerHelper.getEntityManager().persist(lRep);
 	managerHelper.commit();
 }
 }

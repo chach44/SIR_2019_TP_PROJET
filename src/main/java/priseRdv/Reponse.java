@@ -61,9 +61,9 @@ public class Reponse {
 	public void setReponsespossibles(Collection<ReponsePossible> reponsespossibles) {
 		this.reponsespossibles = reponsespossibles;
 	}
-	public static void sauvgarder() {
+	public static void sauvgarder(Reponse rep) {
 	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist();
+	managerHelper.getEntityManager().persist(rep);
 	managerHelper.commit();
 }
 }

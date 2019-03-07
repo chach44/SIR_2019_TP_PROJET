@@ -4,13 +4,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import jpa.EntityManagerHelper;
 
-import java.awt.List;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -19,6 +21,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = "Reunion.findAll", query = "SELECT r FROM Reunion r"), })
 public class Reunion {
 
 	private int id;
@@ -93,7 +96,7 @@ public class Reunion {
 	public void setParticipantPresent(Collection<Participant> participantPresent) {
 		ParticipantPresent = participantPresent;
 	}
-	
+
 	@ManyToMany
 	public Collection<Participant> getParticipantAbsent() {
 		return ParticipantAbsent;
@@ -102,7 +105,7 @@ public class Reunion {
 	public void setParticipantAbsent(Collection<Participant> participantAbsent) {
 		ParticipantAbsent = participantAbsent;
 	}
-	
+
 	public void addParticipantAbsent(Participant participantAbsent) {
 		ParticipantAbsent.add(participantAbsent);
 	}
@@ -111,7 +114,7 @@ public class Reunion {
 		ParticipantPresent.add(participantPresent);
 	}
 
-	@OneToOne(mappedBy="reunion")
+	@OneToOne(mappedBy = "reunion")
 	public Sondages getleSondage() {
 		return leSondage;
 	}
@@ -121,7 +124,8 @@ public class Reunion {
 		this.leSondage = sondage;
 
 	}
-	 @Temporal(TemporalType.DATE)
+
+	@Temporal(TemporalType.DATE)
 	public Date getDateReunion() {
 		return dateReunion;
 	}
@@ -129,11 +133,15 @@ public class Reunion {
 	public void setDateReunion(Date dateReunion) {
 		this.dateReunion = dateReunion;
 	}
-	
-	
-	public static void sauvgarder() 
+
+	public static void sauvgarder(Reunion r) {
 		managerHelper.beginTransaction();
-		managerHelper.getEntityManager().persist();
+		managerHelper.getEntityManager().persist(r);
 		managerHelper.commit();
+	}
+
+	public static List<Reunion> getReunionList() {
+		managerHelper.beginTransaction();
+		return managerHelper.getEntityManager().createNamedQuery("Reunion.findAll").getResultList();
 	}
 }

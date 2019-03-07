@@ -97,9 +97,9 @@ public class Participant {
 		return lesAllergies;
 	}
 
-	public static void sauvgarder() {
+	public static void sauvgarder(Participant p) {
 	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist();
+	managerHelper.getEntityManager().persist(p);
 	managerHelper.commit();
 }
 	

@@ -35,9 +35,9 @@ public class Nourriture {
 		this.nomAliment = nomAliment;
 	}
 
-	public static void sauvgarder() {
+	public static void sauvgarder(Nourriture n) {
 	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist();
+	managerHelper.getEntityManager().persist(n);
 	managerHelper.commit();
 }
 }

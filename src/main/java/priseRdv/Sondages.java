@@ -1,6 +1,8 @@
 package priseRdv;
 
 import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -114,10 +116,15 @@ public class Sondages {
 		this.urlPAD = urlPAD;
 	}
 	
-	public static void sauvgarder() {
+	public static void sauvgarder(Sondages sondage) {
 	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist();
+	managerHelper.getEntityManager().persist(sondage);
 	managerHelper.commit();
 }
+	
+	public static List<Sondages> getSondagesList() {
+		managerHelper.beginTransaction();
+		return	managerHelper.getEntityManager().createNamedQuery("Sondages.findAll").getResultList();		 
+	}
 	
 }

@@ -63,9 +63,9 @@ public class ReponsePossible {
 		this.reponse = reponse;
 	}
 
-	public static void sauvgarder() {
+	public static void sauvgarder(ReponsePossible rPossible) {
 	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist();
+	managerHelper.getEntityManager().persist(rPossible);
 	managerHelper.commit();
 }
 
