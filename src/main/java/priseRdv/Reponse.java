@@ -2,35 +2,39 @@ package priseRdv;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import jpa.EntityManagerHelper;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = "Reponse.findAll", query = "SELECT r FROM Reponse r ") })
 public class Reponse {
-	
+
 	private long id;
 	private Date datereponse;
 	private ListeReponse reponsequestion;
 	private Collection<ReponsePossible> reponsespossibles;
 	static EntityManagerHelper managerHelper;
-	
+
 	public Reponse() {
 	}
-	
+
 	@Id
 	@GeneratedValue
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -43,7 +47,7 @@ public class Reponse {
 	public void setDatereponse(Date datereponse) {
 		this.datereponse = datereponse;
 	}
-	
+
 	@ManyToOne
 	public ListeReponse getReponsequestion() {
 		return reponsequestion;
@@ -52,7 +56,7 @@ public class Reponse {
 	public void setReponsequestion(ListeReponse reponsequestion) {
 		this.reponsequestion = reponsequestion;
 	}
-	
+
 	@ManyToMany
 	public Collection<ReponsePossible> getReponsespossibles() {
 		return reponsespossibles;
@@ -61,9 +65,15 @@ public class Reponse {
 	public void setReponsespossibles(Collection<ReponsePossible> reponsespossibles) {
 		this.reponsespossibles = reponsespossibles;
 	}
+
 	public static void sauvgarder(Reponse rep) {
-	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist(rep);
-	managerHelper.commit();
-}
+		managerHelper.beginTransaction();
+		managerHelper.getEntityManager().persist(rep);
+		managerHelper.commit();
+	}
+
+	public static List<Reponse> getReponseList() {
+		managerHelper.beginTransaction();
+		return managerHelper.getEntityManager().createNamedQuery("Reponse.findAll").getResultList();
+	}
 }

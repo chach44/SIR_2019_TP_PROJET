@@ -1,6 +1,7 @@
 package priseRdv;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,39 +15,36 @@ import javax.persistence.OneToMany;
 import jpa.EntityManagerHelper;
 
 @Entity
-@NamedQueries({
-    @NamedQuery(name="Question.findAll",
-                query="SELECT q FROM Question q")
-}) 
+@NamedQueries({ @NamedQuery(name = "Question.findAll", query = "SELECT q FROM Question q") })
 public class Question {
-	
+
 	private long id;
 	private String enonce;
 	private boolean multiple;
 	private Collection<ReponsePossible> reponsepossibles;
-private Collection<Sondages> lesSondages;
-static EntityManagerHelper managerHelper;
+	private Collection<Sondages> lesSondages;
+	static EntityManagerHelper managerHelper;
 
-	public Question(String enonce, boolean multiple ) {
-		this.enonce =  enonce;
+	public Question(String enonce, boolean multiple) {
+		this.enonce = enonce;
 		this.multiple = multiple;
 	}
-	
-	public Question( ) {
-		
+
+	public Question() {
+
 	}
-	
+
 	@Id
 	@GeneratedValue
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
 
-	@Column(length=2048)
+	@Column(length = 2048)
 	public String getEnonce() {
 		return enonce;
 	}
@@ -63,8 +61,7 @@ static EntityManagerHelper managerHelper;
 		this.multiple = multiple;
 	}
 
-
-	@OneToMany(mappedBy="question")
+	@OneToMany(mappedBy = "question")
 	public Collection<ReponsePossible> getReponsepossibles() {
 		return reponsepossibles;
 	}
@@ -76,7 +73,8 @@ static EntityManagerHelper managerHelper;
 	public void addReponsePossible(ReponsePossible reponseP) {
 		this.reponsepossibles.add(reponseP);
 	}
-	@ManyToMany(mappedBy="questions")
+
+	@ManyToMany(mappedBy = "questions")
 	public Collection<Sondages> getLesSondages() {
 		return lesSondages;
 	}
@@ -84,16 +82,19 @@ static EntityManagerHelper managerHelper;
 	public void setLesSondages(Collection<Sondages> lesSondages) {
 		this.lesSondages = lesSondages;
 	}
-	
+
 	public void addSondages(Sondages lesondage) {
 		lesSondages.add(lesondage);
 	}
+
 	public static void sauvgarder(Question q) {
-	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist(q);
-	managerHelper.commit();
-}
+		managerHelper.beginTransaction();
+		managerHelper.getEntityManager().persist(q);
+		managerHelper.commit();
+	}
 
-
-	
+	public static List<Question> getQuestionList() {
+		managerHelper.beginTransaction();
+		return managerHelper.getEntityManager().createNamedQuery("Question.findAll").getResultList();
+	}
 }
