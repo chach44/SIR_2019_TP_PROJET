@@ -15,24 +15,22 @@ import jpa.EntityManagerHelper;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name="ReponsePossible.findQuestion",
-                query="SELECT rP FROM ReponsePossible rP where rP.QuestionId = :idquestion "),
-    @NamedQuery(name="ReponsePossible.findAll",
-    query="SELECT rP FROM ReponsePossible rP ")
-}) 
+		@NamedQuery(name = "ReponsePossible.findQuestion", query = "SELECT rP FROM ReponsePossible rP where rP.QuestionId = :idquestion "),
+		@NamedQuery(name = "ReponsePossible.findAll", query = "SELECT rP FROM ReponsePossible rP "),
+		@NamedQuery(name = "ReponsePossible.findById", query = "SELECT rP FROM ReponsePossible rP  rP.id = :id ") })
 public class ReponsePossible {
-	
+
 	private long id;
 	private boolean correct;
 	private Question question;
 	private Collection<Reponse> reponse;
 	static EntityManagerHelper managerHelper;
-	
+
 	public ReponsePossible(Question q, Collection<Reponse> listeReponse) {
 		question = q;
 		reponse = listeReponse;
 	}
-	
+
 	public ReponsePossible() {
 	}
 
@@ -45,7 +43,7 @@ public class ReponsePossible {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public boolean isCorrect() {
 		return correct;
 	}
@@ -73,17 +71,45 @@ public class ReponsePossible {
 	}
 
 	public static void sauvgarder(ReponsePossible rPossible) {
-	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist(rPossible);
-	managerHelper.commit();
-}
+		try {
+			managerHelper.beginTransaction();
+			managerHelper.getEntityManager().persist(rPossible);
+			managerHelper.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
 	public static List<ReponsePossible> getReponsePossibleList(String idQuestion) {
-		managerHelper.beginTransaction();
-		return managerHelper.getEntityManager().createNamedQuery("ReponsePossible.findQuestion").setParameter("idquestion", idQuestion).getResultList();
+		try {
+			managerHelper.beginTransaction();
+			return managerHelper.getEntityManager().createNamedQuery("ReponsePossible.findQuestion")
+					.setParameter("idquestion", idQuestion).getResultList();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
+
 	public static List<ReponsePossible> getReponsePossibleList() {
-		managerHelper.beginTransaction();
-		return managerHelper.getEntityManager().createNamedQuery("ReponsePossible.findAll").getResultList();
+		try {
+			managerHelper.beginTransaction();
+			return managerHelper.getEntityManager().createNamedQuery("ReponsePossible.findAll").getResultList();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	public static void remove(Long id) {
+		try {
+			managerHelper.beginTransaction();
+			ReponsePossible LaRepPossible = (ReponsePossible) managerHelper.getEntityManager()
+					.createNamedQuery("ReponsePossible.findById").setParameter(":id", id).getSingleResult();
+			managerHelper.getEntityManager().remove(LaRepPossible);
+			managerHelper.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

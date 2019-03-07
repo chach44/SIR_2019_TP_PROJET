@@ -17,7 +17,8 @@ import javax.persistence.TemporalType;
 import jpa.EntityManagerHelper;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "Reponse.findAll", query = "SELECT r FROM Reponse r ") })
+@NamedQueries({ @NamedQuery(name = "Reponse.findAll", query = "SELECT r FROM Reponse r "),
+		@NamedQuery(name = "Reponse.findById", query = "SELECT r FROM ReponsePossible r  r.id = :id ") })
 public class Reponse {
 
 	private long id;
@@ -67,13 +68,34 @@ public class Reponse {
 	}
 
 	public static void sauvgarder(Reponse rep) {
-		managerHelper.beginTransaction();
-		managerHelper.getEntityManager().persist(rep);
-		managerHelper.commit();
+		try {
+			managerHelper.beginTransaction();
+			managerHelper.getEntityManager().persist(rep);
+			managerHelper.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public static List<Reponse> getReponseList() {
-		managerHelper.beginTransaction();
-		return managerHelper.getEntityManager().createNamedQuery("Reponse.findAll").getResultList();
+		try {
+			managerHelper.beginTransaction();
+			return managerHelper.getEntityManager().createNamedQuery("Reponse.findAll").getResultList();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	public static void remove(Long id) {
+		try {
+			managerHelper.beginTransaction();
+			Reponse laReponse = (Reponse) managerHelper.getEntityManager().createNamedQuery("Reponse.findById")
+					.setParameter(":id", id).getSingleResult();
+			managerHelper.getEntityManager().remove(laReponse);
+			managerHelper.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

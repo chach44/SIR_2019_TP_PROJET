@@ -15,7 +15,8 @@ import javax.persistence.OneToMany;
 import jpa.EntityManagerHelper;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "Question.findAll", query = "SELECT q FROM Question q") })
+@NamedQueries({ @NamedQuery(name = "Question.findAll", query = "SELECT q FROM Question q"),
+		@NamedQuery(name = "Question.findById", query = "SELECT q FROM Question q  q.id = :id ") })
 public class Question {
 
 	private long id;
@@ -88,13 +89,34 @@ public class Question {
 	}
 
 	public static void sauvgarder(Question q) {
-		managerHelper.beginTransaction();
-		managerHelper.getEntityManager().persist(q);
-		managerHelper.commit();
+		try {
+			managerHelper.beginTransaction();
+			managerHelper.getEntityManager().persist(q);
+			managerHelper.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public static List<Question> getQuestionList() {
-		managerHelper.beginTransaction();
-		return managerHelper.getEntityManager().createNamedQuery("Question.findAll").getResultList();
+		try {
+			managerHelper.beginTransaction();
+			return managerHelper.getEntityManager().createNamedQuery("Question.findAll").getResultList();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	public static void remove(Long id) {
+		try {
+			managerHelper.beginTransaction();
+			Question laQuestion = (Question) managerHelper.getEntityManager().createNamedQuery("Question.findById")
+					.setParameter(":id", id).getSingleResult();
+			managerHelper.getEntityManager().remove(laQuestion);
+			managerHelper.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

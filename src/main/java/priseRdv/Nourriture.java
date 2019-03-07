@@ -11,45 +11,66 @@ import javax.persistence.NamedQuery;
 import jpa.EntityManagerHelper;
 
 @Entity
-@NamedQueries({
-    @NamedQuery(name="Nourriture.findAll",
-                query="SELECT n FROM Nourriture n")
-}) 
+@NamedQueries({ @NamedQuery(name = "Nourriture.findAll", query = "SELECT n FROM Nourriture n"),
+		@NamedQuery(name = "Nourriture.findById", query = "SELECT n FROM Nourriture n  n.idAliment = :idAliment ") })
 public class Nourriture {
 
 	public int idAliment;
 	public String nomAliment;
 	static EntityManagerHelper managerHelper;
-	
+
 	public Nourriture(String nomAliment) {
 		this.nomAliment = nomAliment;
 	}
-	
-	@Id 
+
+	@Id
 	@GeneratedValue
 	public int getIdAliment() {
 		return idAliment;
 	}
-	
+
 	public void setIdAliment(int idAliment) {
 		this.idAliment = idAliment;
 	}
-	
+
 	public String getNomAliment() {
 		return nomAliment;
 	}
-	
+
 	public void setNomAliment(String nomAliment) {
 		this.nomAliment = nomAliment;
 	}
 
 	public static void sauvgarder(Nourriture n) {
-	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist(n);
-	managerHelper.commit();
-}
+		try {
+			managerHelper.beginTransaction();
+			managerHelper.getEntityManager().persist(n);
+			managerHelper.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
 	public static List<Nourriture> getNourritureList() {
-		managerHelper.beginTransaction();
-		return	managerHelper.getEntityManager().createNamedQuery("Nourriture.findAll").getResultList();		 
+		try {
+			managerHelper.beginTransaction();
+			return managerHelper.getEntityManager().createNamedQuery("Nourriture.findAll").getResultList();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	public static void remove(int id) {
+		try {
+			managerHelper.beginTransaction();
+			Nourriture laNourriture = (Nourriture) managerHelper.getEntityManager()
+					.createNamedQuery("Nourriture.findById").setParameter(":idAliment", id).getSingleResult();
+			managerHelper.getEntityManager().remove(laNourriture);
+			managerHelper.commit();
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		}
 	}
 }

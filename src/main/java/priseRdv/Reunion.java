@@ -21,7 +21,8 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "Reunion.findAll", query = "SELECT r FROM Reunion r"), })
+@NamedQueries({ @NamedQuery(name = "Reunion.findAll", query = "SELECT r FROM Reunion r"),
+		@NamedQuery(name = "Reunion.findById", query = "SELECT r FROM Reunion r  WHERE r.id = :id") })
 public class Reunion {
 
 	private int id;
@@ -135,13 +136,35 @@ public class Reunion {
 	}
 
 	public static void sauvgarder(Reunion r) {
-		managerHelper.beginTransaction();
-		managerHelper.getEntityManager().persist(r);
-		managerHelper.commit();
+		try {
+			managerHelper.beginTransaction();
+			managerHelper.getEntityManager().persist(r);
+			managerHelper.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public static List<Reunion> getReunionList() {
-		managerHelper.beginTransaction();
-		return managerHelper.getEntityManager().createNamedQuery("Reunion.findAll").getResultList();
+
+		try {
+			managerHelper.beginTransaction();
+			return managerHelper.getEntityManager().createNamedQuery("Reunion.findAll").getResultList();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	public static void remove(Long idReunion) {
+		try {
+			managerHelper.beginTransaction();
+			Reunion laReunion = (Reunion) managerHelper.getEntityManager().createNamedQuery("Reunion.findById")
+					.setParameter(":id", idReunion).getSingleResult();
+			managerHelper.getEntityManager().remove(laReunion);
+			managerHelper.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

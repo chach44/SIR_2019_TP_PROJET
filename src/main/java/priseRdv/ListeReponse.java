@@ -14,12 +14,8 @@ import javax.persistence.OneToMany;
 import jpa.EntityManagerHelper;
 
 @Entity
-@NamedQueries({
-    @NamedQuery(name="ListeReponse.findAll",
-                query="SELECT lp FROM ListeReponse lp"),
-    @NamedQuery(name="ListeReponse.findBy",
-                query="SELECT lp FROM ListeReponse lp WHERE lp.sondage_id = :id")
-}) 
+@NamedQueries({ @NamedQuery(name = "ListeReponse.findAll", query = "SELECT lp FROM ListeReponse lp"),
+		@NamedQuery(name = "ListeReponse.findById", query = "SELECT lp FROM ListeReponse lp WHERE lp.sondage_id = :id") })
 
 public class ListeReponse {
 
@@ -28,13 +24,13 @@ public class ListeReponse {
 	private Sondages sondage;
 	private Collection<Reponse> reponses;
 	static EntityManagerHelper managerHelper;
-	
+
 	public ListeReponse(Participant participant, Sondages sondage) {
 		this.participant = participant;
 		this.sondage = sondage;
 	}
 
-	@Id 
+	@Id
 	@GeneratedValue
 	public long getId() {
 		return id;
@@ -43,7 +39,7 @@ public class ListeReponse {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	@ManyToOne
 	public Participant getParticipant() {
 		return participant;
@@ -74,14 +70,37 @@ public class ListeReponse {
 	public void addReponse(Reponse reponses) {
 		this.reponses.add(reponses);
 	}
+
 	public static void sauvgarder(ListeReponse lRep) {
-	managerHelper.beginTransaction();
-	managerHelper.getEntityManager().persist(lRep);
-	managerHelper.commit();
-}
-	
+		try {
+			managerHelper.beginTransaction();
+			managerHelper.getEntityManager().persist(lRep);
+			managerHelper.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
 	public static List<ListeReponse> getListReponseList() {
-		managerHelper.beginTransaction();
-		return managerHelper.getEntityManager().createNamedQuery("ListeReponse.findAll").getResultList();
+		try {
+			managerHelper.beginTransaction();
+			return managerHelper.getEntityManager().createNamedQuery("ListeReponse.findAll").getResultList();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	public static void remove(long id) {
+		try {
+			managerHelper.beginTransaction();
+			ListeReponse laListeReponse = (ListeReponse) managerHelper.getEntityManager()
+					.createNamedQuery("ListeReponse.findById").setParameter(":id", id).getSingleResult();
+			managerHelper.getEntityManager().remove(laListeReponse);
+			managerHelper.commit();
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
