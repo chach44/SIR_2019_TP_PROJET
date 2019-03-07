@@ -18,7 +18,7 @@ public class ReponseServlet extends HttpServlet {
             throws ServletException, IOException {
     	resp.setContentType("text/html");
         PrintWriter p = new PrintWriter(resp.getOutputStream());
-        p.print("Reunion");
+        p.print("reponse");
         p.flush();
         
     }

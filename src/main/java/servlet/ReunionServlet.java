@@ -15,14 +15,9 @@ public class ReunionServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
-		try (PrintWriter out = resp.getWriter();) {
-
-			out.println("\"<!DOCTYPE html><HTML><BODY>"+
-					"<H1>Ajouter une nouvelle reunion</H1>"+
-					"<FORM Method=\"POST\" Action=\"/Reunion\">"
-					+ "</BODY></HTML>"
-					);
-		}
+        PrintWriter p = new PrintWriter(resp.getOutputStream());
+        p.print("Reunion");
+        p.flush();
 
 	}
 
