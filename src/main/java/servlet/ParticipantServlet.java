@@ -2,13 +2,18 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import priseRdv.ListeReponse;
 import priseRdv.Participant;
 
 @WebServlet(name="Participant",
@@ -19,24 +24,54 @@ public class ParticipantServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	resp.setContentType("text/html");
     	 PrintWriter out = resp.getWriter();
+    	 
+    	 
+    	 //Connexion à la base
+    		EntityManagerFactory factory = Persistence.createEntityManagerFactory("dev");
+    		EntityManager manager = factory.createEntityManager();
+    		// Req qui va chercher toutes les réponses pour le sondage
+    		List<ListeReponse> ListPrecedenteReponse = manager.createQuery("SELECT r FROM Reponse r WHERE r.sondage = :idSondage")
+    			 .setParameter("idSondage", idSondage)
+    			 .getResultList();
+    	 
+    	    out.println("<HTML>\n<BODY>\n" +
+	                "<H1>Participant</H1>\n" + 
+	                "<FORM Method=\"POST\" Action=\"/Participant\">"+
+	                "<table>" 
+	                
+	                // Construction du header
+      + "<thead>"+
+       "<tr>"+
+       	   "<th colspan=\"1\">Nom \\ Date</th>"+
+           "<th colspan=\"1\">22/12/19</th>"+
+           "<th colspan=\"1\">23/12/19</th>"+
+           "<th colspan=\"1\">24/12/19</th>"+
+           "<th colspan=\"1\">25/12/19</th>"+
+       "</tr>"+
+   "</thead>"+
+    		
+    		
+    		
+    		
+    		
+    		
+    		// construction du tableau des réponses déjà effectué
+    		for (ListeReponse laRep : ListPrecedenteReponse) 
+    		{ 
+    			laRep.getParticipant().getFirstname();
+    			laRep.getReponses().
+    		}
+    		
+    		
+    		
     	 int i = 1;
   	 
     	 //Exemple de lien participant
-    	    out.println("<HTML>\n<BODY>\n" +
-    	                "<H1>Participant</H1>\n" + 
-    	                "<FORM Method=\"POST\" Action=\"/Participant\">"+
+    	
     	            
     	                
-    	                "<table>" +
- 		               "<thead>"+
- 			               "<tr>"+
- 			               	   "<th colspan=\"1\">Nom \\ Date</th>"+
- 			                   "<th colspan=\"1\">22/12/19</th>"+
- 			                   "<th colspan=\"1\">23/12/19</th>"+
- 			                   "<th colspan=\"1\">24/12/19</th>"+
- 			                   "<th colspan=\"1\">25/12/19</th>"+
- 			               "</tr>"+
- 		               "</thead>"+
+    	           
+ 		        
  		               "<tbody>"+
  			               "<tr>"+
  			                   "<td><INPUT type=text size=20 name=nom_prenom></td>"+
