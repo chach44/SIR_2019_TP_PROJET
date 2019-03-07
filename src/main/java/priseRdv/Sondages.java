@@ -129,9 +129,6 @@ public class Sondages {
 	
 	public static Sondages findById(String idSondage) {
 		managerHelper.beginTransaction();
-		
 		return	(Sondages) managerHelper.getEntityManager().createNamedQuery("Sondages.findById").setParameter(":id", idSondage).getSingleResult();
-    	
-
-	}
+    	}
 }
