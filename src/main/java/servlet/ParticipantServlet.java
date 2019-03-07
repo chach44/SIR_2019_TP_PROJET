@@ -33,7 +33,8 @@ public class ParticipantServlet extends HttpServlet {
 		for (Participant p : Participant.getParticipantList()) {
 			out.println("Nom : " + p.getName() + " "+ p.getFirstname());
 		}
-		out.println("</BODY></HTML>");
+		out.println(" <br> <a href=\"http://localhost:8080/index.html\">retour menu</a>"
+				+ "</BODY></HTML>");
 		out.flush();
 
 		
