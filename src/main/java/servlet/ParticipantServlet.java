@@ -25,6 +25,8 @@ public class ParticipantServlet extends HttpServlet {
     	    out.println("<HTML>\n<BODY>\n" +
     	                "<H1>Participant</H1>\n" + 
     	                "<FORM Method=\"POST\" Action=\"/Participant\">"+
+    	            
+    	                
     	                "<table>" +
  		               "<thead>"+
  			               "<tr>"+

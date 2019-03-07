@@ -33,7 +33,13 @@ public class SondageServlet extends HttpServlet {
 					"<INPUT type=hidden value="+intDate+" name=intDate><BR>"+
 					"Question :         <INPUT type=text size=70 name=question"+intQuestion+"><BR>"+
 					"<INPUT type=button value=Ajouter question size=20 name=addQuestion onclick=addQuestion()><BR>"+
+					
 					"<INPUT type=hidden value="+intQuestion+" name=intQuestion><BR>"+
+					"<INPUT type=checkbox  name=\"ChoixMultiple\"> <label for=\"ChoixMultiple\">Question à choix multiple ?</label><BR>"+
+					 "<label for=\"reponsonse\">Réponses possible :</label>"+
+					"<INPUT type=text size=70 name=\"reponsonse\"><BR>"+
+					"<INPUT type=button value=Ajouter des réponses possibles size=20 name=addReponses onclick=addReponses()><BR>"+
+					
 					"<INPUT type=submit value=Send>"+
 					"</FORM>  "      +
 		    	    "<SCRIPT LANGUAGE=\"JavaScript\">  function  addField() {" + 
@@ -44,7 +50,11 @@ public class SondageServlet extends HttpServlet {
 		    	    
 					"function  addQuestion() {" + 
 			    	    "	     var field = \"<input type='text' name=question"+intQuestion+1+" value=''/>;" + 
-			    	    "	     document.getElementById(\"question"+intDate+").innerHtml += field;" + 	   
+			    	    "	     document.getElementById(\"question"+intQuestion+").innerHtml += field;" + 	   
+			    	    "	}"+
+			    	    "function  addReponses() {" + 
+			    	    "	     var field = \"<input type='text' name=question"+intQuestion+1+" value=''/>;" + 
+			    	    "	     document.getElementById(\"addReponses\").innerHtml += field;" + 	   
 			    	    "	}"+
 		    		"</script>"+
 		    		"</BODY></HTML>");
