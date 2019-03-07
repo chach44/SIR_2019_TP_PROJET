@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import jpa.EntityManagerHelper;
+
 @Entity
 public class Reponse {
 	
@@ -18,7 +20,8 @@ public class Reponse {
 	private Date datereponse;
 	private ListeReponse reponsequestion;
 	private Collection<ReponsePossible> reponsespossibles;
-
+	static EntityManagerHelper managerHelper;
+	
 	public Reponse() {
 	}
 	
@@ -58,5 +61,9 @@ public class Reponse {
 	public void setReponsespossibles(Collection<ReponsePossible> reponsespossibles) {
 		this.reponsespossibles = reponsespossibles;
 	}
-
+	public static void sauvgarder() {
+	managerHelper.beginTransaction();
+	managerHelper.getEntityManager().persist();
+	managerHelper.commit();
+}
 }

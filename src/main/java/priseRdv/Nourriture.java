@@ -4,11 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import jpa.EntityManagerHelper;
+
 @Entity
 public class Nourriture {
 
 	public int idAliment;
 	public String nomAliment;
+	static EntityManagerHelper managerHelper;
 	
 	public Nourriture(String nomAliment) {
 		this.nomAliment = nomAliment;
@@ -32,5 +35,9 @@ public class Nourriture {
 		this.nomAliment = nomAliment;
 	}
 
-
+	public static void sauvgarder() {
+	managerHelper.beginTransaction();
+	managerHelper.getEntityManager().persist();
+	managerHelper.commit();
+}
 }

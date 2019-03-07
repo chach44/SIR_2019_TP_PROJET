@@ -7,9 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import jpa.EntityManagerHelper;
+
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Question.findAll",
+                query="SELECT q FROM Question q")
+}) 
 public class Question {
 	
 	private long id;
@@ -17,7 +25,8 @@ public class Question {
 	private boolean multiple;
 	private Collection<ReponsePossible> reponsepossibles;
 private Collection<Sondages> lesSondages;
-	
+static EntityManagerHelper managerHelper;
+
 	public Question(String enonce, boolean multiple ) {
 		this.enonce =  enonce;
 		this.multiple = multiple;
@@ -79,7 +88,11 @@ private Collection<Sondages> lesSondages;
 	public void addSondages(Sondages lesondage) {
 		lesSondages.add(lesondage);
 	}
-
+	public static void sauvgarder() {
+	managerHelper.beginTransaction();
+	managerHelper.getEntityManager().persist();
+	managerHelper.commit();
+}
 
 
 	

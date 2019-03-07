@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import priseRdv.ListeReponse;
-import priseRdv.Nourriture;
 import priseRdv.Participant;
 import priseRdv.Sondages;
 

@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import jpa.EntityManagerHelper;
+
 @Entity
 public class ReponsePossible {
 	
@@ -15,6 +17,7 @@ public class ReponsePossible {
 	private boolean correct;
 	private Question question;
 	private Collection<Reponse> reponse;
+	static EntityManagerHelper managerHelper;
 	
 	public ReponsePossible(Question q, Collection<Reponse> listeReponse) {
 		question = q;
@@ -60,6 +63,10 @@ public class ReponsePossible {
 		this.reponse = reponse;
 	}
 
-
+	public static void sauvgarder() {
+	managerHelper.beginTransaction();
+	managerHelper.getEntityManager().persist();
+	managerHelper.commit();
+}
 
 }

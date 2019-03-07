@@ -6,11 +6,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import jpa.EntityManagerHelper;
+
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Sondages.findAll",
+                query="SELECT s FROM Sondages s"),
+    @NamedQuery(name="Sondages.findById",
+                query="SELECT s FROM Sondages s WHERE s.id = :id")
+}) 
 public class Sondages {
 
 	private long id;
@@ -20,7 +30,8 @@ public class Sondages {
 	private Collection<ListeReponse> reponses;
 	private Reunion reunion;
 	private String urlPAD;
-
+	static EntityManagerHelper managerHelper;
+	
 	public Sondages(String theme,Collection<Question> listeQuestions) {
 		this.theme = theme;
 		questions = listeQuestions;
@@ -102,5 +113,11 @@ public class Sondages {
 	public void setUrlPAD(String urlPAD) {
 		this.urlPAD = urlPAD;
 	}
+	
+	public static void sauvgarder() {
+	managerHelper.beginTransaction();
+	managerHelper.getEntityManager().persist();
+	managerHelper.commit();
+}
 	
 }

@@ -6,15 +6,24 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import jpa.EntityManagerHelper;
+
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Participant.findAll",
+                query="SELECT p FROM Participant p")
+}) 
 public class Participant {
 
 	private String name, firstname, email;
 	private Collection<Nourriture> lesAllergies;
 	private Collection<Nourriture> lesPreferences;
 	private Collection<Sondages> lesSondagesCreer;
-
+	static EntityManagerHelper managerHelper;
 
 	public Participant(String name, String firstname, String email) {
 		this.name = name;
@@ -88,4 +97,10 @@ public class Participant {
 		return lesAllergies;
 	}
 
+	public static void sauvgarder() {
+	managerHelper.beginTransaction();
+	managerHelper.getEntityManager().persist();
+	managerHelper.commit();
+}
+	
 }

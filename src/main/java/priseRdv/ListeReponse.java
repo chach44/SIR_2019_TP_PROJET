@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import jpa.EntityManagerHelper;
+
 @Entity
 public class ListeReponse {
 
@@ -15,6 +17,7 @@ public class ListeReponse {
 	private Participant participant;
 	private Sondages sondage;
 	private Collection<Reponse> reponses;
+	static EntityManagerHelper managerHelper;
 	
 	public ListeReponse(Participant participant, Sondages sondage) {
 		this.participant = participant;
@@ -61,5 +64,9 @@ public class ListeReponse {
 	public void addReponse(Reponse reponses) {
 		this.reponses.add(reponses);
 	}
-	
+	public static void sauvgarder() {
+	managerHelper.beginTransaction();
+	managerHelper.getEntityManager().persist();
+	managerHelper.commit();
+}
 }

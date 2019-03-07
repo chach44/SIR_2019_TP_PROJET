@@ -8,12 +8,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import jpa.EntityManagerHelper;
+
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 
 @Entity
 public class Reunion {
@@ -25,6 +28,7 @@ public class Reunion {
 	private Collection<Participant> ParticipantPresent;
 	private Sondages leSondage;
 	private Date dateReunion;
+	static EntityManagerHelper managerHelper;
 
 	@Id
 	@GeneratedValue
@@ -124,5 +128,12 @@ public class Reunion {
 
 	public void setDateReunion(Date dateReunion) {
 		this.dateReunion = dateReunion;
+	}
+	
+	
+	public static void sauvgarder() 
+		managerHelper.beginTransaction();
+		managerHelper.getEntityManager().persist();
+		managerHelper.commit();
 	}
 }
