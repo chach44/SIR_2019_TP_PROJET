@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import priseRdv.ListeReponse;
+import priseRdv.Nourriture;
 import priseRdv.Participant;
 import priseRdv.Sondages;
 
@@ -28,22 +29,32 @@ public class ParticipantServlet extends HttpServlet {
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 
+		out.println("<HTML>\n<BODY>\n" + "<H1>Les participants</H1>\n");
+		for (Participant p : Participant.getParticipantList()) {
+			out.println("Nom : " + p.getName() + " "+ p.getFirstname());
+		}
+		out.println("</BODY></HTML>");
+		out.flush();
+
+		
+		
+		
 		// Req qui va chercher toutes les réponses pour le sondage
 //    		List<ListeReponse> ListPrecedenteReponse = manager.createQuery("SELECT r FROM ListeReponse r WHERE r.sondage = :idSondage")
 //    			 .setParameter("idSondage", "1") //idSondage
 //    			 .getResultList();
 
-		out.println("<HTML>\n<BODY>\n" + "<H1>Participant</H1>\n" + "<FORM Method=\"POST\" Action=\"/Participant\">"
-				+ "<table>"
-
+		//		out.println("<HTML>\n<BODY>\n" + "<H1>Participant</H1>\n" + "<FORM Method=\"POST\" Action=\"/Participant\">"
+		//		+ "<table>"
+				//
 				// Construction du header
-				+ "<thead>" + "<tr>" + "<th colspan=\"1\">Nom \\ Date</th>" + "<th colspan=\"1\">22/12/19</th>"
-				+ "<th colspan=\"1\">23/12/19</th>" + "<th colspan=\"1\">24/12/19</th>"
-				+ "<th colspan=\"1\">25/12/19</th>" + "</tr>" + "</thead>" +
+		//		+ "<thead>" + "<tr>" + "<th colspan=\"1\">Nom \\ Date</th>" + "<th colspan=\"1\">22/12/19</th>"
+		//	+ "<th colspan=\"1\">23/12/19</th>" + "<th colspan=\"1\">24/12/19</th>"
+		//	+ "<th colspan=\"1\">25/12/19</th>" + "</tr>" + "</thead>" +
 
-				"<tbody>" + "<tr>");
+		//	"<tbody>" + "<tr>");
 
-		out.println("<td><INPUT type=text size=20 name=nom_prenom ></td>");
+		//out.println("<td><INPUT type=text size=20 name=nom_prenom ></td>");
 
 //    		// construction du tableau des réponses déjà effectué
 //    		for (ListeReponse laRep : ListPrecedenteReponse) 
@@ -55,10 +66,10 @@ public class ParticipantServlet extends HttpServlet {
 
 		// Exemple de lien participant
 
-		out.println("<td><input type=\"checkbox\" id=\"date1\"></td>"
-				+ "<td><input type=\"checkbox\" id=\"date2\"></td>" + "<td><input type=\"checkbox\" id=\"date3\"></td>"
-				+ "<td><input type=\"checkbox\" id=\"date4\"></td>" + "<td><INPUT type=submit value=Send></td>"
-				+ "</tr>" + "</tbody>" + "</table>" + "</FORM>  " + "</BODY></HTML>");
+		//out.println("<td><input type=\"checkbox\" id=\"date1\"></td>"
+		//+ "<td><input type=\"checkbox\" id=\"date2\"></td>" + "<td><input type=\"checkbox\" id=\"date3\"></td>"
+		//	+ "<td><input type=\"checkbox\" id=\"date4\"></td>" + "<td><INPUT type=submit value=Send></td>"
+		//	+ "</tr>" + "</tbody>" + "</table>" + "</FORM>  " + "</BODY></HTML>");
 
 	}
 
@@ -70,14 +81,14 @@ public class ParticipantServlet extends HttpServlet {
 				req.getParameter("email"));
 		Participant.sauvgarder(participant);
 
-		Sondages sondage = Sondages.findById(req.getParameter("firstname"));
+	//	Sondages sondage = Sondages.findById(req.getParameter("firstname"));
 
-		ListeReponse.sauvgarder(new ListeReponse(participant, sondage));
+	//	ListeReponse.sauvgarder(new ListeReponse(participant, sondage));
 
-		PrintWriter out = resp.getWriter();
+		//PrintWriter out = resp.getWriter();
 
-		out.println("<HTML>\n<BODY>\n" + "<H1>Reponse au sondage :</H1>\n" + req.getParameter("nom_prenom")
-				+ " a repondu !" + "</BODY></HTML>");
+	//	out.println("<HTML>\n<BODY>\n" + "<H1>Reponse au sondage :</H1>\n" + req.getParameter("nom_prenom")
+	//			+ " a repondu !" + "</BODY></HTML>");
 
 	}
 }

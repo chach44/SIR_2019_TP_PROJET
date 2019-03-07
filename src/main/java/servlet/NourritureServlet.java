@@ -26,9 +26,7 @@ public class NourritureServlet extends HttpServlet {
 		for (Nourriture n : Nourriture.getNourritureList()) {
 			p.println("Nom : " + n.nomAliment);
 		}
-		p.println("<INPUT type=submit value=Send>" +
-
-				"</BODY></HTML>");
+		p.println("</BODY></HTML>");
 		p.flush();
 
 	}

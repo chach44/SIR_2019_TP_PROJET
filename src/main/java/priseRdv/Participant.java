@@ -1,6 +1,7 @@
 package priseRdv;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -102,5 +103,10 @@ public class Participant {
 	managerHelper.getEntityManager().persist(p);
 	managerHelper.commit();
 }
+	
+	public static List<Participant> getParticipantList() {
+		managerHelper.beginTransaction();
+		return	managerHelper.getEntityManager().createNamedQuery("Participant.findAll").getResultList();		 
+	}
 	
 }
