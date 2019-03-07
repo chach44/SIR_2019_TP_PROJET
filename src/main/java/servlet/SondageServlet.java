@@ -2,18 +2,30 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import priseRdv.Participant;
+import priseRdv.Question;
+import priseRdv.Reponse;
+import priseRdv.ReponsePossible;
+import priseRdv.Sondages;
+
 @WebServlet(name = "sondage", urlPatterns = { "/Sondage" })
 public class SondageServlet extends HttpServlet {
+	
 	 int intDate = 1;
 	 int intQuestion = 1;
-	
+	 private EntityManager manager;
+	 private Collection<Question> listeQuestions;
+	 private Collection<Reponse> reponse;
 	
 	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -71,6 +83,31 @@ public class SondageServlet extends HttpServlet {
 		
 		int intDate= Integer.parseInt(req.getParameter("intDate"));
 		int intQuestion= Integer.parseInt(req.getParameter("intQuestion"));
+		
+		
+		TypedQuery<Question> quest;
+    	
+    	for(int j = 0; j<intQuestion;j++) {
+    		boolean mult = Boolean.parseBoolean(req.getParameter("mult"+intQuestion));
+    		Question q = new Question(req.getParameter("question"+intQuestion), mult);
+    		manager.persist(q);
+    		listeQuestions.add(q);
+    		if(mult) {
+    			int intnbRep= Integer.parseInt(req.getParameter("nbRep")); //ATTENTION les reponses ne sont actuellement pas bien récupérées
+    			for(int a = 0; a<intQuestion;a++) {
+    				//reponse.add(req.getParameter("rep"));
+    			}
+    		}
+    		
+    		ReponsePossible repPo = new ReponsePossible(q,reponse);
+    		manager.persist(repPo);
+    	}
+    	
+    	Sondages s = new Sondages(req.getParameter("theme"),listeQuestions);
+    	
+    	manager.persist(s);
+    	
+    	//Sondages s = sondage.getSingleResult();
 		
 		//ajouter les questions en base
 		

@@ -16,7 +16,12 @@ public class ReponsePossible {
 	private Question question;
 	private Collection<Reponse> reponse;
 	
-	private ReponsePossible() {
+	public ReponsePossible(Question q, Collection<Reponse> listeReponse) {
+		question = q;
+		reponse = listeReponse;
+	}
+	
+	public ReponsePossible() {
 	}
 
 	@Id
