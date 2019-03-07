@@ -21,7 +21,7 @@ import jpa.EntityManagerHelper;
     @NamedQuery(name="Sondages.findAll",
                 query="SELECT s FROM Sondages s"),
     @NamedQuery(name="Sondages.findById",
-                query="SELECT s FROM Sondages s WHERE s.id = :id")
+                query="SELECT s FROM Sondages s WHERE s.id = :id" )
 }) 
 public class Sondages {
 
@@ -127,4 +127,11 @@ public class Sondages {
 		return	managerHelper.getEntityManager().createNamedQuery("Sondages.findAll").getResultList();		 
 	}
 	
+	public static Sondages findById(String idSondage) {
+		managerHelper.beginTransaction();
+		
+		return	(Sondages) managerHelper.getEntityManager().createNamedQuery("Sondages.findById").setParameter(":id", idSondage).getSingleResult();
+    	
+
+	}
 }

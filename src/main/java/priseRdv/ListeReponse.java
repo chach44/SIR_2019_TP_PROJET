@@ -1,16 +1,26 @@
 package priseRdv;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import jpa.EntityManagerHelper;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="ListeReponse.findAll",
+                query="SELECT lp FROM ListeReponse lp"),
+    @NamedQuery(name="ListeReponse.findBy",
+                query="SELECT lp FROM ListeReponse lp WHERE lp.sondage_id = :id")
+}) 
+
 public class ListeReponse {
 
 	private long id;
@@ -69,4 +79,9 @@ public class ListeReponse {
 	managerHelper.getEntityManager().persist(lRep);
 	managerHelper.commit();
 }
+	
+	public static List<ListeReponse> getListReponseList() {
+		managerHelper.beginTransaction();
+		return managerHelper.getEntityManager().createNamedQuery("ListeReponse.findAll").getResultList();
+	}
 }
