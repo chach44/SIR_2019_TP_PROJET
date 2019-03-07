@@ -1,16 +1,23 @@
 package priseRdv;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import jpa.EntityManagerHelper;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="ReponsePossible.findQuestion",
+                query="SELECT rP FROM ReponsePossible rP where rP.QuestionId = :idquestion ")
+}) 
 public class ReponsePossible {
 	
 	private long id;
@@ -69,4 +76,9 @@ public class ReponsePossible {
 	managerHelper.commit();
 }
 
+	public static List<ReponsePossible> getReponsePossibleList(String idQuestion) {
+		managerHelper.beginTransaction();
+		return managerHelper.getEntityManager().createNamedQuery("ReponsePossible.findQuestion").setParameter("idquestion", idQuestion).getResultList();
+	}
+	
 }
