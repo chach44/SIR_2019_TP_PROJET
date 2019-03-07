@@ -30,7 +30,7 @@ public class ParticipantServlet extends HttpServlet {
     		EntityManagerFactory factory = Persistence.createEntityManagerFactory("dev");
     		EntityManager manager = factory.createEntityManager();
     		// Req qui va chercher toutes les réponses pour le sondage
-    		List<ListeReponse> ListPrecedenteReponse = manager.createQuery("SELECT r FROM Reponse r WHERE r.sondage = :idSondage")
+    		List<ListeReponse> ListPrecedenteReponse = manager.createQuery("SELECT r FROM ListeReponse r WHERE r.sondage = :idSondage")
     			 .setParameter("idSondage", idSondage)
     			 .getResultList();
     	 
@@ -52,19 +52,21 @@ public class ParticipantServlet extends HttpServlet {
     		
     		
     		
-    		
+ "<tbody>"+
+  "<tr>"+
     		
     		
     		// construction du tableau des réponses déjà effectué
     		for (ListeReponse laRep : ListPrecedenteReponse) 
     		{ 
-    			laRep.getParticipant().getFirstname();
-    			laRep.getReponses().
+    			 "<td><INPUT type=text size=20 name=nom_prenom value="+laRep.getParticipant().getFirstname();+"></td>"+
+    			
+    			laRep.getReponses();
     		}
     		
     		
     		
-    	 int i = 1;
+
   	 
     	 //Exemple de lien participant
     	
@@ -72,9 +74,8 @@ public class ParticipantServlet extends HttpServlet {
     	                
     	           
  		        
- 		               "<tbody>"+
- 			               "<tr>"+
- 			                   "<td><INPUT type=text size=20 name=nom_prenom></td>"+
+ 		              
+ 			                  
  			                   "<td><input type=\"checkbox\" id=\"date1\"></td>"+
  			                   "<td><input type=\"checkbox\" id=\"date2\"></td>"+
  			                   "<td><input type=\"checkbox\" id=\"date3\"></td>"+
