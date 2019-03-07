@@ -33,8 +33,7 @@ public class NourritureServlet extends HttpServlet {
 			    	    "</BODY></HTML>");
     	
     	
-     
-    //    p.print("Nourriture");
+
         p.flush();
         
     }
@@ -55,7 +54,7 @@ public class NourritureServlet extends HttpServlet {
 		            + req.getParameter("nom") + "\n" +
 		           " <br> <a href=\"http://localhost:8080/index.html\">retour menu</a>"+
 		    "</BODY></HTML>");
-		
-		manager.persist(new Nourriture(req.getParameter("nom")));
+		Nourriture.sauvgarder(new Nourriture(req.getParameter("nom")));
+
     }    
 }
