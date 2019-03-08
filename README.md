@@ -28,6 +28,10 @@
 
 # REPONSES AUX QUESTIONS TP NOSQL 
 # ------------------------------
+# Quelles sont les limites d’une base données orientées document ? 
+# Les base de données orientées documents ne fixe de schéma comme le SQL ce qui peut devenir compliquer a gerer et mettre en place
+
+
 # Quelles sont les types de données stockés dans Redis, que peut on faire comme types de requêtes ?
 # On peut stocker et manipuler des valeurs numériques et binaires. 
 # On peut donc manipuler des listes, des ensembles, des ensembles triés et des tables de hachage. 
