@@ -29,8 +29,9 @@
 # REPONSES AUX QUESTIONS TP NOSQL 
 # ------------------------------
 # Quelles sont les limites d’une base données orientées document ? 
-# Les base de données orientées documents ne fixe de schéma comme le SQL ce qui peut devenir compliquer a gerer et mettre en place
-
+# Les base de données orientées documents ne pas fixe de schéma comme le SQL ce qui peut devenir compliquer a gerer et mettre en place
+# L'abscence de contrainte comme les contraintes SQL peut etre un problème pour certains cas, comme des problèmes de cohérence. Une limite du NoSQL est aussi de ne pas 
+# toujours savoir quel type de données ont traite, cela peu etre embetant avec des types complexes.
 
 # Quelles sont les types de données stockés dans Redis, que peut on faire comme types de requêtes ?
 # On peut stocker et manipuler des valeurs numériques et binaires. 
