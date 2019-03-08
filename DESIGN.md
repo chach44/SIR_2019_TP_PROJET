@@ -6,3 +6,4 @@
 # Maven
 # Architecture REST
 # Framework hibernate
+# HSQLDB
