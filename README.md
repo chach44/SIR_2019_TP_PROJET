@@ -35,6 +35,7 @@
 
 # Quelles sont les types de données stockés dans Redis, que peut on faire comme types de requêtes ?
 # On peut stocker et manipuler des valeurs numériques et binaires. 
+# Redis permet de stocker les données sous une structure de type clé/valeur
 # On peut donc manipuler des listes, des ensembles, des ensembles triés et des tables de hachage. 
 # Les différents type de requêtes sont : get, sadd, zadd, put, hset, hget, hgetall, lpush, rpop.
 
