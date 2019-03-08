@@ -16,7 +16,7 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "Participant.findAll", query = "SELECT p FROM Participant p"),
-		@NamedQuery(name = "Participant.findById", query = "SELECT p FROM Participant p  p.email = :email ") })
+		@NamedQuery(name = "Participant.findById", query = "SELECT p FROM Participant p where p.email = :email ") })
 public class Participant {
 
 	private String name, firstname, email;

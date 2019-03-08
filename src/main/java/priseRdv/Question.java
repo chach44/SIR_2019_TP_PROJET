@@ -16,7 +16,7 @@ import jpa.EntityManagerHelper;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "Question.findAll", query = "SELECT q FROM Question q"),
-		@NamedQuery(name = "Question.findById", query = "SELECT q FROM Question q  q.id = :id ") })
+		@NamedQuery(name = "Question.findById", query = "SELECT q FROM Question q where q.id = :id ") })
 public class Question {
 
 	private long id;

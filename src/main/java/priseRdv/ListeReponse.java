@@ -15,7 +15,7 @@ import jpa.EntityManagerHelper;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "ListeReponse.findAll", query = "SELECT lp FROM ListeReponse lp"),
-		@NamedQuery(name = "ListeReponse.findById", query = "SELECT lp FROM ListeReponse lp WHERE lp.sondage_id = :id") })
+		@NamedQuery(name = "ListeReponse.findById", query = "SELECT lp FROM ListeReponse lp WHERE lp.id = :id") })
 
 public class ListeReponse {
 

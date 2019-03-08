@@ -15,9 +15,9 @@ import jpa.EntityManagerHelper;
 
 @Entity
 @NamedQueries({
-		@NamedQuery(name = "ReponsePossible.findQuestion", query = "SELECT rP FROM ReponsePossible rP where rP.QuestionId = :idquestion "),
+		@NamedQuery(name = "ReponsePossible.findQuestion", query = "SELECT rP FROM ReponsePossible rP where rP.id = :idquestion "),
 		@NamedQuery(name = "ReponsePossible.findAll", query = "SELECT rP FROM ReponsePossible rP "),
-		@NamedQuery(name = "ReponsePossible.findById", query = "SELECT rP FROM ReponsePossible rP  rP.id = :id ") })
+		@NamedQuery(name = "ReponsePossible.findById", query = "SELECT rP FROM ReponsePossible rP where rP.id = :id ") })
 public class ReponsePossible {
 
 	private long id;

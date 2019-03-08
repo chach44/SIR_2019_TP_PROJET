@@ -12,7 +12,7 @@ import jpa.EntityManagerHelper;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "Nourriture.findAll", query = "SELECT n FROM Nourriture n"),
-		@NamedQuery(name = "Nourriture.findById", query = "SELECT n FROM Nourriture n  n.idAliment = :idAliment ") })
+		@NamedQuery(name = "Nourriture.findById", query = "SELECT n FROM Nourriture n where n.idAliment = :idAliment ") })
 public class Nourriture {
 
 	public int idAliment;
