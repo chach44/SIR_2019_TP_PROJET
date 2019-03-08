@@ -14,29 +14,29 @@
 
 # Les fonctionnalités supportées
 # ------------------------------
- Réaliser une application en utilisant JPA :
-     -> Créer les classes Java et utiliser JPA pour créer la base de données ainsi que la couche d’accès aux données
-     -> Un template de projet pour la construction d’application autonome utilisant JPA, hibernate et hsqldb
- Les Servlet :
-     -> Combiner JPA et les Servlet
-     -> Comprendre les principes d’une architecture Rest
+# Réaliser une application en utilisant JPA :
+#     -> Créer les classes Java et utiliser JPA pour créer la base de données ainsi que la couche d’accès aux données
+#     -> Un template de projet pour la construction d’application autonome utilisant JPA, hibernate et hsqldb
+# Les Servlet :
+#     -> Combiner JPA et les Servlet
+ #    -> Comprendre les principes d’une architecture Rest
 
 # Les fonctionnalités à développer
 # --------------------------------
- Les Servlet :
-     -> Comprendre les bénéfices d’un framework comme Jersey
+# Les Servlet :
+#     -> Comprendre les bénéfices d’un framework comme Jersey
 
 
 # REPONSES AUX QUESTIONS TP NOSQL 
 # ------------------------------
- Quelles sont les types de données stockés dans Redis, que peut on faire comme types de requêtes ?
- On peut stocker et manipuler des valeurs numériques et binaires. 
- On peut donc manipuler des listes, des ensembles, des ensembles triés et des tables de hachage. 
- Les différents type de requêtes sont : get, sadd, zadd, put, hset, hget, hgetall, lpush, rpop.
+# Quelles sont les types de données stockés dans Redis, que peut on faire comme types de requêtes ?
+# On peut stocker et manipuler des valeurs numériques et binaires. 
+# On peut donc manipuler des listes, des ensembles, des ensembles triés et des tables de hachage. 
+# Les différents type de requêtes sont : get, sadd, zadd, put, hset, hget, hgetall, lpush, rpop.
 
 
 # ERREUR LORS DE LA GENERATION DE LA BASE
 # ------------------------------
- Nous avons rencontré une erreur lors de l'utilisation de JPA que nous n'avons pas réussit à résoudre.
- Par conséquent la base de donnée générée n'est pas valide. 
- Pour des associations entre deux même table, la génération crée une seule table d'association alors que vous voulions en avoir autant    qu'il existe de lien entre les tables. ( voir les association entre nourriture et participant )
+# Nous avons rencontré une erreur lors de l'utilisation de JPA que nous n'avons pas réussit à résoudre.
+# Par conséquent la base de donnée générée n'est pas valide. 
+# Pour des associations entre deux même table, la génération crée une seule table d'association alors que vous voulions en avoir autant    qu'il existe de lien entre les tables. ( voir les association entre nourriture et participant )
