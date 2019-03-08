@@ -167,4 +167,17 @@ public class Reunion {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public static Reunion getById(Long idReunion) {
+		try {
+			managerHelper.beginTransaction();
+			Reunion laReunion = (Reunion) managerHelper.getEntityManager().createNamedQuery("Reunion.findById")
+					.setParameter(":id", idReunion).getSingleResult();
+			return laReunion;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
 }

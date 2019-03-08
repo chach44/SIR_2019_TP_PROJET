@@ -98,4 +98,17 @@ public class Reponse {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public static Reponse getById(Long id) {
+		try {
+			managerHelper.beginTransaction();
+			Reponse laReponse = (Reponse) managerHelper.getEntityManager().createNamedQuery("Reponse.findById")
+					.setParameter(":id", id).getSingleResult();
+			return laReponse;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
 }

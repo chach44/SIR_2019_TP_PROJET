@@ -112,4 +112,17 @@ public class ReponsePossible {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public static ReponsePossible getById(Long id) {
+		try {
+			managerHelper.beginTransaction();
+			ReponsePossible LaRepPossible = (ReponsePossible) managerHelper.getEntityManager()
+					.createNamedQuery("ReponsePossible.findById").setParameter(":id", id).getSingleResult();
+			return LaRepPossible;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
 }

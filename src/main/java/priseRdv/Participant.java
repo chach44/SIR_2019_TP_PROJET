@@ -126,4 +126,17 @@ public class Participant {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public static Participant getById(String email) {
+		try {
+			managerHelper.beginTransaction();
+			Participant leParticipant = (Participant) managerHelper.getEntityManager()
+					.createNamedQuery("Participant.findById").setParameter(":email", email).getSingleResult();
+			return leParticipant;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
 }

@@ -73,4 +73,17 @@ public class Nourriture {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public static Nourriture getById(int id) {
+		try {
+			managerHelper.beginTransaction();
+			Nourriture laNourriture = (Nourriture) managerHelper.getEntityManager()
+					.createNamedQuery("Nourriture.findById").setParameter(":idAliment", id).getSingleResult();
+			return laNourriture;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
 }

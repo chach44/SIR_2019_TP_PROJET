@@ -98,9 +98,22 @@ public class ListeReponse {
 					.createNamedQuery("ListeReponse.findById").setParameter(":id", id).getSingleResult();
 			managerHelper.getEntityManager().remove(laListeReponse);
 			managerHelper.commit();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		}
+	}
+
+	public static ListeReponse getById(long id) {
+		try {
+			managerHelper.beginTransaction();
+			ListeReponse laListeReponse = (ListeReponse) managerHelper.getEntityManager()
+					.createNamedQuery("ListeReponse.findById").setParameter(":id", id).getSingleResult();
+			return laListeReponse;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
 		}
 	}
 }

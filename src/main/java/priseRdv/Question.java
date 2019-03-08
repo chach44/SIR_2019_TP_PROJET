@@ -119,4 +119,17 @@ public class Question {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public static Question getById(Long id) {
+		try {
+			managerHelper.beginTransaction();
+			Question laQuestion = (Question) managerHelper.getEntityManager().createNamedQuery("Question.findById")
+					.setParameter(":id", id).getSingleResult();
+			return laQuestion;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
 }

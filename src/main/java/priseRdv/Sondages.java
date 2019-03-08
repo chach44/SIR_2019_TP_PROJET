@@ -151,4 +151,17 @@ public class Sondages {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public static Sondages getById(Long idSondage) {
+		try {
+			managerHelper.beginTransaction();
+			Sondages leSondage = (Sondages) managerHelper.getEntityManager().createNamedQuery("Sondages.findById")
+					.setParameter(":id", idSondage).getSingleResult();
+			return leSondage;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
 }
