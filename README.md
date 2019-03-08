@@ -18,14 +18,13 @@
 #     -> Créer les classes Java et utiliser JPA pour créer la base de données ainsi que la couche d’accès aux données
 #     -> Un template de projet pour la construction d’application autonome utilisant JPA, hibernate et hsqldb
 # Les Servlet :
-#     -> Combiner JPA et les Servlet
- #    -> Comprendre les principes d’une architecture Rest
+#    -> Combiner JPA et les Servlet
+#    -> Comprendre les principes d’une architecture Rest
+#    -> Comprendre les bénéfices d’un framework comme Jersey
 
 # Les fonctionnalités à développer
 # --------------------------------
-# Les Servlet :
-#     -> Comprendre les bénéfices d’un framework comme Jersey
-
+# Toute la partie front end, correction du bug lors de la génération de la base avec JPA
 
 # REPONSES AUX QUESTIONS TP NOSQL 
 # ------------------------------
