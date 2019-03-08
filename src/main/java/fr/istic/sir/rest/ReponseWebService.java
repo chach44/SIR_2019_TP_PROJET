@@ -15,6 +15,7 @@ import priseRdv.Reponse;
 
 
 
+
 @Path("/Reponse")
 public class ReponseWebService {
 	 @GET
@@ -36,4 +37,10 @@ public class ReponseWebService {
 		public void createReponse(Reponse laRep) {
 		 Reponse.sauvgarder(laRep);
 		}
+	 
+	 @GET @Path("search/{id}")
+	    @Produces({ MediaType.APPLICATION_JSON })
+	    public Reponse findById(@PathParam("id") String arg0) {
+	        return Reponse.getById(Long.parseLong(arg0));
+	    }
 }

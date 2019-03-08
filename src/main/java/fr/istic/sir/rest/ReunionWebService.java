@@ -11,7 +11,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
 import priseRdv.Reunion;
 
 @Path("/Reunion")
@@ -36,4 +35,10 @@ public class ReunionWebService {
 		public void createRenuion(Reunion laReunion) {
 		 Reunion.sauvgarder(laReunion);
 		}
+	 
+	 @GET @Path("search/{id}")
+	    @Produces({ MediaType.APPLICATION_JSON })
+	    public Reunion findById(@PathParam("id") String arg0) {
+	        return Reunion.getById(Long.parseLong(arg0));
+	    }
 }

@@ -11,7 +11,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
 import priseRdv.ReponsePossible;
 
 @Path("/ReponsePossible")
@@ -35,4 +34,10 @@ public class ReponsePossibleWebService {
 	public void createReponsePossible(ReponsePossible laRepPossible) {
 		ReponsePossible.sauvgarder(laRepPossible);
 	}
+	
+	 @GET @Path("search/{id}")
+	    @Produces({ MediaType.APPLICATION_JSON })
+	    public ReponsePossible findById(@PathParam("id") String arg0) {
+	        return ReponsePossible.getById(Long.parseLong(arg0));
+	    }
 }

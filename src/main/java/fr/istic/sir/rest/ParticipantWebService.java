@@ -11,7 +11,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
 import priseRdv.Participant;
 
 
@@ -37,5 +36,11 @@ public class ParticipantWebService {
 		public void createParticipant(Participant leParticipant) {
 			Participant.sauvgarder(leParticipant);
 		}
+		
+		 @GET @Path("search/{id}")
+		    @Produces({ MediaType.APPLICATION_JSON })
+		    public Participant findById(@PathParam("id") String arg0) {
+		        return Participant.getById(arg0);
+		    }
 	
 }

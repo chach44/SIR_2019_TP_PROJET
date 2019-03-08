@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+
 import priseRdv.Nourriture;
 
 
@@ -36,4 +37,10 @@ public class NourritureWebService {
 		public void createNourriture(Nourriture laNourriture) {
 			Nourriture.sauvgarder(laNourriture);
 		}
+		
+		 @GET @Path("search/{id}")
+		    @Produces({ MediaType.APPLICATION_JSON })
+		    public Nourriture findById(@PathParam("id") String arg0) {
+		        return Nourriture.getById(Integer.parseInt(arg0));
+		    }
 }

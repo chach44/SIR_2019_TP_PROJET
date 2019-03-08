@@ -33,5 +33,11 @@ public class SondageWebService {
 		public void createSondage(Sondages leSondage) {
 		 Sondages.sauvgarder(leSondage);
 		}
+	 
+	 @GET @Path("search/{id}")
+	    @Produces({ MediaType.APPLICATION_JSON })
+	    public Sondages findById(@PathParam("id") String arg0) {
+	        return Sondages.getById(Long.parseLong(arg0));
+	    }
 
 }

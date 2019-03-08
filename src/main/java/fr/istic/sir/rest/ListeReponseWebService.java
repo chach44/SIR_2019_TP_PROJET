@@ -35,4 +35,10 @@ public class ListeReponseWebService {
 	public void createListeReponse(ListeReponse listeRep) {
 		ListeReponse.sauvgarder(listeRep);
 	}
+	
+	 @GET @Path("search/{id}")
+	    @Produces({ MediaType.APPLICATION_JSON })
+	    public ListeReponse findById(@PathParam("id") String arg0) {
+	        return ListeReponse.getById(Long.parseLong(arg0));
+	    }
 }
