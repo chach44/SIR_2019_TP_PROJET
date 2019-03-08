@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -27,7 +29,7 @@ public class Sondages {
 	private Collection<ListeReponse> reponses;
 	private Reunion reunion;
 	private String urlPAD;
-	static EntityManagerHelper managerHelper;
+	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
 
 	public Sondages(String theme, Collection<Question> listeQuestions) {
 		this.theme = theme;
@@ -115,15 +117,17 @@ public class Sondages {
 	}
 
 	public static void sauvgarder(Sondages sondage) {
-		managerHelper.beginTransaction();
-		managerHelper.getEntityManager().persist(sondage);
-		managerHelper.commit();
+		EntityTransaction trans = manager.getTransaction();
+		  trans.begin();
+		  manager.persist(sondage);
+		trans.commit();
 	}
 
 	public static List<Sondages> getSondagesList() {
 		try {
-		managerHelper.beginTransaction();
-		return	managerHelper.getEntityManager().createNamedQuery("Sondages.findAll").getResultList();	
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+		return	manager.createNamedQuery("Sondages.findAll").getResultList();	
 		}catch(Exception e) {
             System.out.println(e.getMessage());
             return null;
@@ -132,8 +136,9 @@ public class Sondages {
 
 	public static Sondages findById(String idSondage) {
 		try {
-		managerHelper.beginTransaction();
-		return	(Sondages) managerHelper.getEntityManager().createNamedQuery("Sondages.findById").setParameter(":id", idSondage).getSingleResult();
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+		return	(Sondages) manager.createNamedQuery("Sondages.findById").setParameter(":id", idSondage).getSingleResult();
 		}catch(Exception e) {
             System.out.println(e.getMessage());
             return null;
@@ -142,11 +147,12 @@ public class Sondages {
 
 	public static void remove(Long idSondage) {
 		try {
-			managerHelper.beginTransaction();
-			Sondages leSondage = (Sondages) managerHelper.getEntityManager().createNamedQuery("Sondages.findById")
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			Sondages leSondage = (Sondages) manager.createNamedQuery("Sondages.findById")
 					.setParameter(":id", idSondage).getSingleResult();
-			managerHelper.getEntityManager().remove(leSondage);
-			managerHelper.commit();
+			manager.remove(leSondage);
+			trans.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -154,8 +160,9 @@ public class Sondages {
 	
 	public static Sondages getById(Long idSondage) {
 		try {
-			managerHelper.beginTransaction();
-			Sondages leSondage = (Sondages) managerHelper.getEntityManager().createNamedQuery("Sondages.findById")
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			Sondages leSondage = (Sondages) manager.createNamedQuery("Sondages.findById")
 					.setParameter(":id", idSondage).getSingleResult();
 			return leSondage;
 

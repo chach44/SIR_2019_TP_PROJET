@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -24,7 +26,7 @@ public class Question {
 	private boolean multiple;
 	private Collection<ReponsePossible> reponsepossibles;
 	private Collection<Sondages> lesSondages;
-	static EntityManagerHelper managerHelper;
+	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
 
 	public Question(String enonce, boolean multiple) {
 		this.enonce = enonce;
@@ -90,9 +92,10 @@ public class Question {
 
 	public static void sauvgarder(Question q) {
 		try {
-			managerHelper.beginTransaction();
-			managerHelper.getEntityManager().persist(q);
-			managerHelper.commit();
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			  manager.persist(q);
+			  trans.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -100,8 +103,9 @@ public class Question {
 
 	public static List<Question> getQuestionList() {
 		try {
-			managerHelper.beginTransaction();
-			return managerHelper.getEntityManager().createNamedQuery("Question.findAll").getResultList();
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			return manager.createNamedQuery("Question.findAll").getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -110,11 +114,12 @@ public class Question {
 
 	public static void remove(Long id) {
 		try {
-			managerHelper.beginTransaction();
-			Question laQuestion = (Question) managerHelper.getEntityManager().createNamedQuery("Question.findById")
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			Question laQuestion = (Question) manager.createNamedQuery("Question.findById")
 					.setParameter(":id", id).getSingleResult();
-			managerHelper.getEntityManager().remove(laQuestion);
-			managerHelper.commit();
+			manager.remove(laQuestion);
+			trans.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -122,8 +127,9 @@ public class Question {
 	
 	public static Question getById(Long id) {
 		try {
-			managerHelper.beginTransaction();
-			Question laQuestion = (Question) managerHelper.getEntityManager().createNamedQuery("Question.findById")
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			Question laQuestion = (Question) manager.createNamedQuery("Question.findById")
 					.setParameter(":id", id).getSingleResult();
 			return laQuestion;
 

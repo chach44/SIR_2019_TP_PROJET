@@ -35,8 +35,6 @@ public class ParticipantServlet extends HttpServlet {
 		out.println(" <br> <a href=\"http://localhost:8080/index.html\">retour menu</a>"
 				+ "</BODY></HTML>");
 		out.flush();
-
-
 	}
 
 	@Override

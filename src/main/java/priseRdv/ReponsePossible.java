@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -24,7 +26,7 @@ public class ReponsePossible {
 	private boolean correct;
 	private Question question;
 	private Collection<Reponse> reponse;
-	static EntityManagerHelper managerHelper;
+	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
 
 	public ReponsePossible(Question q, Collection<Reponse> listeReponse) {
 		question = q;
@@ -72,9 +74,10 @@ public class ReponsePossible {
 
 	public static void sauvgarder(ReponsePossible rPossible) {
 		try {
-			managerHelper.beginTransaction();
-			managerHelper.getEntityManager().persist(rPossible);
-			managerHelper.commit();
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			  manager.persist(rPossible);
+			trans.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -82,8 +85,9 @@ public class ReponsePossible {
 
 	public static List<ReponsePossible> getReponsePossibleList(String idQuestion) {
 		try {
-			managerHelper.beginTransaction();
-			return managerHelper.getEntityManager().createNamedQuery("ReponsePossible.findQuestion")
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			return manager.createNamedQuery("ReponsePossible.findQuestion")
 					.setParameter("idquestion", idQuestion).getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -93,8 +97,9 @@ public class ReponsePossible {
 
 	public static List<ReponsePossible> getReponsePossibleList() {
 		try {
-			managerHelper.beginTransaction();
-			return managerHelper.getEntityManager().createNamedQuery("ReponsePossible.findAll").getResultList();
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			return manager.createNamedQuery("ReponsePossible.findAll").getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -103,11 +108,12 @@ public class ReponsePossible {
 
 	public static void remove(Long id) {
 		try {
-			managerHelper.beginTransaction();
-			ReponsePossible LaRepPossible = (ReponsePossible) managerHelper.getEntityManager()
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			ReponsePossible LaRepPossible = (ReponsePossible) manager
 					.createNamedQuery("ReponsePossible.findById").setParameter(":id", id).getSingleResult();
-			managerHelper.getEntityManager().remove(LaRepPossible);
-			managerHelper.commit();
+			manager.remove(LaRepPossible);
+			trans.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -115,8 +121,9 @@ public class ReponsePossible {
 	
 	public static ReponsePossible getById(Long id) {
 		try {
-			managerHelper.beginTransaction();
-			ReponsePossible LaRepPossible = (ReponsePossible) managerHelper.getEntityManager()
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			ReponsePossible LaRepPossible = (ReponsePossible) manager
 					.createNamedQuery("ReponsePossible.findById").setParameter(":id", id).getSingleResult();
 			return LaRepPossible;
 

@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -23,7 +25,7 @@ public class ListeReponse {
 	private Participant participant;
 	private Sondages sondage;
 	private Collection<Reponse> reponses;
-	static EntityManagerHelper managerHelper;
+	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
 
 	public ListeReponse(Participant participant, Sondages sondage) {
 		this.participant = participant;
@@ -73,9 +75,10 @@ public class ListeReponse {
 
 	public static void sauvgarder(ListeReponse lRep) {
 		try {
-			managerHelper.beginTransaction();
-			managerHelper.getEntityManager().persist(lRep);
-			managerHelper.commit();
+			 EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			  manager.persist(lRep);
+			  trans.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -83,8 +86,9 @@ public class ListeReponse {
 
 	public static List<ListeReponse> getListReponseList() {
 		try {
-			managerHelper.beginTransaction();
-			return managerHelper.getEntityManager().createNamedQuery("ListeReponse.findAll").getResultList();
+			 EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			return manager.createNamedQuery("ListeReponse.findAll").getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -93,11 +97,12 @@ public class ListeReponse {
 
 	public static void remove(long id) {
 		try {
-			managerHelper.beginTransaction();
-			ListeReponse laListeReponse = (ListeReponse) managerHelper.getEntityManager()
+			 EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			ListeReponse laListeReponse = (ListeReponse) manager
 					.createNamedQuery("ListeReponse.findById").setParameter(":id", id).getSingleResult();
-			managerHelper.getEntityManager().remove(laListeReponse);
-			managerHelper.commit();
+			manager.remove(laListeReponse);
+			trans.commit();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -106,8 +111,9 @@ public class ListeReponse {
 
 	public static ListeReponse getById(long id) {
 		try {
-			managerHelper.beginTransaction();
-			ListeReponse laListeReponse = (ListeReponse) managerHelper.getEntityManager()
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			ListeReponse laListeReponse = (ListeReponse) manager
 					.createNamedQuery("ListeReponse.findById").setParameter(":id", id).getSingleResult();
 			return laListeReponse;
 

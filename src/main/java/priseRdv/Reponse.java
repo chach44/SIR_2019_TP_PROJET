@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -25,7 +27,7 @@ public class Reponse {
 	private Date datereponse;
 	private ListeReponse reponsequestion;
 	private Collection<ReponsePossible> reponsespossibles;
-	static EntityManagerHelper managerHelper;
+	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
 
 	public Reponse() {
 	}
@@ -69,9 +71,10 @@ public class Reponse {
 
 	public static void sauvgarder(Reponse rep) {
 		try {
-			managerHelper.beginTransaction();
-			managerHelper.getEntityManager().persist(rep);
-			managerHelper.commit();
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			  manager.persist(rep);
+			  trans.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -79,8 +82,9 @@ public class Reponse {
 
 	public static List<Reponse> getReponseList() {
 		try {
-			managerHelper.beginTransaction();
-			return managerHelper.getEntityManager().createNamedQuery("Reponse.findAll").getResultList();
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			return manager.createNamedQuery("Reponse.findAll").getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -89,11 +93,12 @@ public class Reponse {
 
 	public static void remove(Long id) {
 		try {
-			managerHelper.beginTransaction();
-			Reponse laReponse = (Reponse) managerHelper.getEntityManager().createNamedQuery("Reponse.findById")
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			Reponse laReponse = (Reponse) manager.createNamedQuery("Reponse.findById")
 					.setParameter(":id", id).getSingleResult();
-			managerHelper.getEntityManager().remove(laReponse);
-			managerHelper.commit();
+			manager.remove(laReponse);
+			trans.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -101,8 +106,9 @@ public class Reponse {
 	
 	public static Reponse getById(Long id) {
 		try {
-			managerHelper.beginTransaction();
-			Reponse laReponse = (Reponse) managerHelper.getEntityManager().createNamedQuery("Reponse.findById")
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			Reponse laReponse = (Reponse) manager.createNamedQuery("Reponse.findById")
 					.setParameter(":id", id).getSingleResult();
 			return laReponse;
 

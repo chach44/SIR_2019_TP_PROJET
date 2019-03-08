@@ -19,6 +19,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "Reunion.findAll", query = "SELECT r FROM Reunion r"),
@@ -32,7 +33,7 @@ public class Reunion {
 	private Collection<Participant> ParticipantPresent;
 	private Sondages leSondage;
 	private Date dateReunion;
-	static EntityManagerHelper managerHelper;
+	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
 
 	@Id
 	@GeneratedValue
@@ -137,9 +138,10 @@ public class Reunion {
 
 	public static void sauvgarder(Reunion r) {
 		try {
-			managerHelper.beginTransaction();
-			managerHelper.getEntityManager().persist(r);
-			managerHelper.commit();
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			  manager.persist(r);
+			trans.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -148,8 +150,9 @@ public class Reunion {
 	public static List<Reunion> getReunionList() {
 
 		try {
-			managerHelper.beginTransaction();
-			return managerHelper.getEntityManager().createNamedQuery("Reunion.findAll").getResultList();
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			return manager.createNamedQuery("Reunion.findAll").getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -158,11 +161,12 @@ public class Reunion {
 
 	public static void remove(Long idReunion) {
 		try {
-			managerHelper.beginTransaction();
-			Reunion laReunion = (Reunion) managerHelper.getEntityManager().createNamedQuery("Reunion.findById")
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			Reunion laReunion = (Reunion) manager.createNamedQuery("Reunion.findById")
 					.setParameter(":id", idReunion).getSingleResult();
-			managerHelper.getEntityManager().remove(laReunion);
-			managerHelper.commit();
+			manager.remove(laReunion);
+			trans.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -170,8 +174,9 @@ public class Reunion {
 	
 	public static Reunion getById(Long idReunion) {
 		try {
-			managerHelper.beginTransaction();
-			Reunion laReunion = (Reunion) managerHelper.getEntityManager().createNamedQuery("Reunion.findById")
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			Reunion laReunion = (Reunion) manager.createNamedQuery("Reunion.findById")
 					.setParameter(":id", idReunion).getSingleResult();
 			return laReunion;
 

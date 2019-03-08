@@ -3,6 +3,8 @@ package priseRdv;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -17,7 +19,7 @@ public class Nourriture {
 
 	public int idAliment;
 	public String nomAliment;
-	static EntityManagerHelper managerHelper;
+	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
 
 	public Nourriture(String nomAliment) {
 		this.nomAliment = nomAliment;
@@ -43,9 +45,10 @@ public class Nourriture {
 
 	public static void sauvgarder(Nourriture n) {
 		try {
-			managerHelper.beginTransaction();
-			managerHelper.getEntityManager().persist(n);
-			managerHelper.commit();
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			  manager.persist(n);
+			  trans.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -53,8 +56,9 @@ public class Nourriture {
 
 	public static List<Nourriture> getNourritureList() {
 		try {
-			managerHelper.beginTransaction();
-			return managerHelper.getEntityManager().createNamedQuery("Nourriture.findAll").getResultList();
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			return manager.createNamedQuery("Nourriture.findAll").getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -63,11 +67,12 @@ public class Nourriture {
 
 	public static void remove(int id) {
 		try {
-			managerHelper.beginTransaction();
-			Nourriture laNourriture = (Nourriture) managerHelper.getEntityManager()
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			Nourriture laNourriture = (Nourriture) manager
 					.createNamedQuery("Nourriture.findById").setParameter(":idAliment", id).getSingleResult();
-			managerHelper.getEntityManager().remove(laNourriture);
-			managerHelper.commit();
+			manager.remove(laNourriture);
+			trans.commit();
 		} catch (Exception e) {
 			
 			System.out.println(e.getMessage());
@@ -76,8 +81,9 @@ public class Nourriture {
 	
 	public static Nourriture getById(int id) {
 		try {
-			managerHelper.beginTransaction();
-			Nourriture laNourriture = (Nourriture) managerHelper.getEntityManager()
+			EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			Nourriture laNourriture = (Nourriture) manager
 					.createNamedQuery("Nourriture.findById").setParameter(":idAliment", id).getSingleResult();
 			return laNourriture;
 

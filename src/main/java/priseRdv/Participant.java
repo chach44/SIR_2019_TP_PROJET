@@ -28,7 +28,7 @@ public class Participant {
 	private Collection<Nourriture> lesAllergies;
 	private Collection<Nourriture> lesPreferences;
 	private Collection<Sondages> lesSondagesCreer;
-	static EntityManagerHelper managerHelper ;
+  static  EntityManager manager = EntityManagerHelper.getEntityManager();
 
 	public Participant(String name, String firstname, String email) {
 		this.name = name;
@@ -102,11 +102,10 @@ public class Participant {
 
 	public static void sauvgarder(Participant p) {
 		try {
-			managerHelper.beginTransaction();
-			managerHelper.getEntityManager().persist(p);
-			managerHelper.commit();
-
-
+			  EntityTransaction trans = manager.getTransaction();
+			  manager.persist(p);
+			  trans.commit();
+			  
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -114,11 +113,12 @@ public class Participant {
 
 	public static List<Participant> getParticipantList() {
 		try {
-			managerHelper.beginTransaction();
-		        List<Participant> laListe = managerHelper.getEntityManager().createNamedQuery("Participant.findAll").getResultList();;
-		        managerHelper.commit();
-
-		        return laListe;
+			
+			  EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			  
+		        List<Participant> listResult = manager.createNamedQuery("Participant.findAll").getResultList();
+			       return listResult;
 		
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -129,11 +129,12 @@ public class Participant {
 	public static void remove(String email) {
 		try {
 			
-			managerHelper.beginTransaction();
-	        Participant leParticipant  = (Participant) managerHelper.getEntityManager().createNamedQuery("Participant.findById").setParameter(":email", email).getSingleResult();
-	        managerHelper.getEntityManager().remove(leParticipant);
-	        managerHelper.commit();
-			
+			  EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+			   Participant leParticipant  = (Participant) manager.createNamedQuery("Participant.findById").setParameter(":email", email).getSingleResult();
+			   manager.remove(leParticipant);
+			   trans.commit();
+			   
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -141,10 +142,11 @@ public class Participant {
 
 	public static Participant getById(String email) {
 		try {
-			managerHelper.beginTransaction();
-			Participant leParticipant = (Participant) managerHelper.getEntityManager()
-				.createNamedQuery("Participant.findById").setParameter(":email", email).getSingleResult();
-			return leParticipant;
+			 EntityTransaction trans = manager.getTransaction();
+			  trans.begin();
+				Participant leParticipant = (Participant) manager
+					.createNamedQuery("Participant.findById").setParameter(":email", email).getSingleResult();
+				return leParticipant;
 
 
 		} catch (Exception e) {
