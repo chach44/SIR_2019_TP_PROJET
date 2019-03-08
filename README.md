@@ -33,3 +33,10 @@
 # On peut stocker et manipuler des valeurs numériques et binaires. 
 # On peut donc manipuler des listes, des ensembles, des ensembles triés et des tables de hachage. 
 # Les différents type de requêtes sont : get, sadd, zadd, put, hset, hget, hgetall, lpush, rpop.
+
+
+# ERREUR LORS DE LA GENERATION DE LA BASE
+# ------------------------------
+# Nous avons rencontré une erreur lors de l'utilisation de JPA que nous n'avons pas réussit à résoudre.
+# Par conséquent la base de donnée générée n'est pas valide. 
+#  Pour des associations entre deux même table, la génération crée une seule table d'association alors que vous voulions en avoir autant # qu'il existe de lien entre les tables. ( voir les association entre nourriture et participant )
