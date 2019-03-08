@@ -31,7 +31,9 @@ public class ListeReponse {
 		this.participant = participant;
 		this.sondage = sondage;
 	}
-
+	public ListeReponse() {
+	
+	}
 	@Id
 	@GeneratedValue
 	public long getId() {

@@ -24,7 +24,7 @@ public class NourritureServlet extends HttpServlet {
 
 		p.println("<HTML>\n<BODY>\n" + "<H1>Les aliments</H1>\n");
 		for (Nourriture n : Nourriture.getNourritureList()) {
-			p.println("Nom : " + n.nomAliment);
+			p.println("Nom : " + n.getNomAliment());
 		}
 		p.println(" <br> <a href=\"http://localhost:8080/index.html\">retour menu</a>"
 				+ "</BODY></HTML>");

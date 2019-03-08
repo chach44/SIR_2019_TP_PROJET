@@ -24,7 +24,9 @@ public class Nourriture {
 	public Nourriture(String nomAliment) {
 		this.nomAliment = nomAliment;
 	}
-
+	public Nourriture() {
+		
+	}
 	@Id
 	@GeneratedValue
 	public int getIdAliment() {
@@ -56,7 +58,8 @@ public class Nourriture {
 	public static List<Nourriture> getNourritureList() {
 		try {
 		
-			return manager.getEntityManager().createNamedQuery("Nourriture.findAll").getResultList();
+			 List<Nourriture> laListe = manager.getEntityManager().createNamedQuery("Nourriture.findAll").getResultList();
+			 return laListe;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
