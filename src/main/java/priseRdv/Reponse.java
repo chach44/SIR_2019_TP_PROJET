@@ -27,7 +27,7 @@ public class Reponse {
 	private Date datereponse;
 	private ListeReponse reponsequestion;
 	private Collection<ReponsePossible> reponsespossibles;
-	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
+	static EntityManagerHelper manager ;
 
 	public Reponse() {
 	}
@@ -71,10 +71,9 @@ public class Reponse {
 
 	public static void sauvgarder(Reponse rep) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			  manager.persist(rep);
-			  trans.commit();
+			manager.beginTransaction();
+			  manager.getEntityManager().persist(rep);
+			  manager.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -82,9 +81,8 @@ public class Reponse {
 
 	public static List<Reponse> getReponseList() {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			return manager.createNamedQuery("Reponse.findAll").getResultList();
+		
+			return manager.getEntityManager().createNamedQuery("Reponse.findAll").getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -93,12 +91,11 @@ public class Reponse {
 
 	public static void remove(Long id) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			Reponse laReponse = (Reponse) manager.createNamedQuery("Reponse.findById")
+			manager.beginTransaction();
+			Reponse laReponse = (Reponse) manager.getEntityManager().createNamedQuery("Reponse.findById")
 					.setParameter(":id", id).getSingleResult();
-			manager.remove(laReponse);
-			trans.commit();
+			manager.getEntityManager().remove(laReponse);
+			manager.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -106,9 +103,8 @@ public class Reponse {
 	
 	public static Reponse getById(Long id) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			Reponse laReponse = (Reponse) manager.createNamedQuery("Reponse.findById")
+	
+			Reponse laReponse = (Reponse) manager.getEntityManager().createNamedQuery("Reponse.findById")
 					.setParameter(":id", id).getSingleResult();
 			return laReponse;
 

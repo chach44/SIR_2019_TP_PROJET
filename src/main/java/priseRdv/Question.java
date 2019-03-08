@@ -26,7 +26,8 @@ public class Question {
 	private boolean multiple;
 	private Collection<ReponsePossible> reponsepossibles;
 	private Collection<Sondages> lesSondages;
-	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
+	static EntityManagerHelper manager ;
+
 
 	public Question(String enonce, boolean multiple) {
 		this.enonce = enonce;
@@ -92,10 +93,9 @@ public class Question {
 
 	public static void sauvgarder(Question q) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			  manager.persist(q);
-			  trans.commit();
+			manager.beginTransaction();
+			  manager.getEntityManager().persist(q);
+			  manager.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -103,9 +103,7 @@ public class Question {
 
 	public static List<Question> getQuestionList() {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			return manager.createNamedQuery("Question.findAll").getResultList();
+			return manager.getEntityManager().createNamedQuery("Question.findAll").getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -114,12 +112,11 @@ public class Question {
 
 	public static void remove(Long id) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			Question laQuestion = (Question) manager.createNamedQuery("Question.findById")
+			manager.beginTransaction();
+			Question laQuestion = (Question) manager.getEntityManager().createNamedQuery("Question.findById")
 					.setParameter(":id", id).getSingleResult();
-			manager.remove(laQuestion);
-			trans.commit();
+			manager.getEntityManager().remove(laQuestion);
+			manager.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -127,9 +124,8 @@ public class Question {
 	
 	public static Question getById(Long id) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			Question laQuestion = (Question) manager.createNamedQuery("Question.findById")
+			
+			Question laQuestion = (Question) manager.getEntityManager().createNamedQuery("Question.findById")
 					.setParameter(":id", id).getSingleResult();
 			return laQuestion;
 

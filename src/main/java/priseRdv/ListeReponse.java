@@ -25,7 +25,7 @@ public class ListeReponse {
 	private Participant participant;
 	private Sondages sondage;
 	private Collection<Reponse> reponses;
-	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
+	static EntityManagerHelper manager ;
 
 	public ListeReponse(Participant participant, Sondages sondage) {
 		this.participant = participant;
@@ -75,10 +75,9 @@ public class ListeReponse {
 
 	public static void sauvgarder(ListeReponse lRep) {
 		try {
-			 EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			  manager.persist(lRep);
-			  trans.commit();
+			manager.beginTransaction();
+			  manager.getEntityManager().persist(lRep);
+			  manager.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -86,9 +85,8 @@ public class ListeReponse {
 
 	public static List<ListeReponse> getListReponseList() {
 		try {
-			 EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			return manager.createNamedQuery("ListeReponse.findAll").getResultList();
+		
+			return manager.getEntityManager().createNamedQuery("ListeReponse.findAll").getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -97,12 +95,11 @@ public class ListeReponse {
 
 	public static void remove(long id) {
 		try {
-			 EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			ListeReponse laListeReponse = (ListeReponse) manager
+			manager.beginTransaction();
+			ListeReponse laListeReponse = (ListeReponse) manager.getEntityManager()
 					.createNamedQuery("ListeReponse.findById").setParameter(":id", id).getSingleResult();
-			manager.remove(laListeReponse);
-			trans.commit();
+			manager.getEntityManager().remove(laListeReponse);
+			manager.commit();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -111,9 +108,8 @@ public class ListeReponse {
 
 	public static ListeReponse getById(long id) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			ListeReponse laListeReponse = (ListeReponse) manager
+		
+			ListeReponse laListeReponse = (ListeReponse) manager.getEntityManager()
 					.createNamedQuery("ListeReponse.findById").setParameter(":id", id).getSingleResult();
 			return laListeReponse;
 

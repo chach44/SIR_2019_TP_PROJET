@@ -33,7 +33,7 @@ public class Reunion {
 	private Collection<Participant> ParticipantPresent;
 	private Sondages leSondage;
 	private Date dateReunion;
-	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
+	static EntityManagerHelper manager ;
 
 	@Id
 	@GeneratedValue
@@ -138,10 +138,9 @@ public class Reunion {
 
 	public static void sauvgarder(Reunion r) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			  manager.persist(r);
-			trans.commit();
+			manager.beginTransaction();
+			  manager.getEntityManager().persist(r);
+			  manager.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -150,9 +149,8 @@ public class Reunion {
 	public static List<Reunion> getReunionList() {
 
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			return manager.createNamedQuery("Reunion.findAll").getResultList();
+
+			return manager.getEntityManager().createNamedQuery("Reunion.findAll").getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -161,12 +159,11 @@ public class Reunion {
 
 	public static void remove(Long idReunion) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			Reunion laReunion = (Reunion) manager.createNamedQuery("Reunion.findById")
+			manager.beginTransaction();
+			Reunion laReunion = (Reunion) manager.getEntityManager().createNamedQuery("Reunion.findById")
 					.setParameter(":id", idReunion).getSingleResult();
-			manager.remove(laReunion);
-			trans.commit();
+			manager.getEntityManager().remove(laReunion);
+			manager.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -174,9 +171,8 @@ public class Reunion {
 	
 	public static Reunion getById(Long idReunion) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			Reunion laReunion = (Reunion) manager.createNamedQuery("Reunion.findById")
+			
+			Reunion laReunion = (Reunion) manager.getEntityManager().createNamedQuery("Reunion.findById")
 					.setParameter(":id", idReunion).getSingleResult();
 			return laReunion;
 

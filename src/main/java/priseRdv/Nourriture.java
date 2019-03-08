@@ -19,7 +19,7 @@ public class Nourriture {
 
 	public int idAliment;
 	public String nomAliment;
-	  static  EntityManager manager = EntityManagerHelper.getEntityManager();
+	static EntityManagerHelper manager ;
 
 	public Nourriture(String nomAliment) {
 		this.nomAliment = nomAliment;
@@ -45,10 +45,9 @@ public class Nourriture {
 
 	public static void sauvgarder(Nourriture n) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			  manager.persist(n);
-			  trans.commit();
+			  manager.beginTransaction();
+			  manager.getEntityManager().persist(n);
+			  manager.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -56,9 +55,8 @@ public class Nourriture {
 
 	public static List<Nourriture> getNourritureList() {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			return manager.createNamedQuery("Nourriture.findAll").getResultList();
+		
+			return manager.getEntityManager().createNamedQuery("Nourriture.findAll").getResultList();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -67,12 +65,11 @@ public class Nourriture {
 
 	public static void remove(int id) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			Nourriture laNourriture = (Nourriture) manager
+			 manager.beginTransaction();
+			Nourriture laNourriture = (Nourriture) manager.getEntityManager()
 					.createNamedQuery("Nourriture.findById").setParameter(":idAliment", id).getSingleResult();
-			manager.remove(laNourriture);
-			trans.commit();
+			manager.getEntityManager().remove(laNourriture);
+			manager.commit();
 		} catch (Exception e) {
 			
 			System.out.println(e.getMessage());
@@ -81,9 +78,8 @@ public class Nourriture {
 	
 	public static Nourriture getById(int id) {
 		try {
-			EntityTransaction trans = manager.getTransaction();
-			  trans.begin();
-			Nourriture laNourriture = (Nourriture) manager
+		
+			Nourriture laNourriture = (Nourriture) manager.getEntityManager()
 					.createNamedQuery("Nourriture.findById").setParameter(":idAliment", id).getSingleResult();
 			return laNourriture;
 

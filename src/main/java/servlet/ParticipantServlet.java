@@ -29,7 +29,8 @@ public class ParticipantServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 
 		out.println("<HTML>\n<BODY>\n" + "<H1>Les participants</H1>\n");
-		for (Participant p : Participant.getParticipantList()) {
+		List<Participant> list =  Participant.getParticipantList();
+		for (Participant p : list) {
 			out.println("Nom : " + p.getName() + " "+ p.getFirstname());
 		}
 		out.println(" <br> <a href=\"http://localhost:8080/index.html\">retour menu</a>"
