@@ -2,6 +2,7 @@ package priseRdv;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -90,7 +91,7 @@ public class Reunion {
 		this.pause = pause;
 	}
 
-	@ManyToMany
+	@ManyToMany  @JoinTable(name="ParticipantPresent")
 	public Collection<Participant> getParticipantPresent() {
 		return ParticipantPresent;
 	}
@@ -99,7 +100,7 @@ public class Reunion {
 		ParticipantPresent = participantPresent;
 	}
 
-	@ManyToMany
+	@ManyToMany  @JoinTable(name="ParticipantAbsent")
 	public Collection<Participant> getParticipantAbsent() {
 		return ParticipantAbsent;
 	}
