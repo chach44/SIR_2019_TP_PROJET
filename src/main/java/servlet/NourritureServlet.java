@@ -21,14 +21,18 @@ public class NourritureServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		PrintWriter p = new PrintWriter(resp.getOutputStream());
-
-		p.println("<HTML>\n<BODY>\n" + "<H1>Les aliments</H1>\n");
-		for (Nourriture n : Nourriture.getNourritureList()) {
-			p.println("Nom : " + n.getNomAliment());
+		try {
+			p.println("<HTML>\n<BODY>\n" + "<H1>Les aliments</H1>\n");
+			for (Nourriture n : Nourriture.getNourritureList()) {
+				p.println("Nom : " + n.nomAliment);
+			}
+			p.println(" <br> <a href=\"http://localhost:8080/index.html\">retour menu</a>"
+					+ "</BODY></HTML>");
+			p.flush();
+		}catch(Exception e) {
+			
 		}
-		p.println(" <br> <a href=\"http://localhost:8080/index.html\">retour menu</a>"
-				+ "</BODY></HTML>");
-		p.flush();
+		
 
 	}
 

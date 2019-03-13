@@ -27,15 +27,18 @@ public class ParticipantServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
-
-		out.println("<HTML>\n<BODY>\n" + "<H1>Les participants</H1>\n");
-		List<Participant> list =  Participant.getParticipantList();
-		for (Participant p : list) {
-			out.println("Nom : " + p.getName() + " "+ p.getFirstname());
+		try {
+			out.println("<HTML>\n<BODY>\n" + "<H1>Les participants</H1>\n");
+			for (Participant p : Participant.getParticipantList()) {
+				out.println("Nom : " + p.getName() + " "+ p.getFirstname());
+			}
+			out.println(" <br> <a href=\"http://localhost:8080/index.html\">retour menu</a>"
+					+ "</BODY></HTML>");
+			out.flush();
+		}catch(Exception e) {
+			
 		}
-		out.println(" <br> <a href=\"http://localhost:8080/index.html\">retour menu</a>"
-				+ "</BODY></HTML>");
-		out.flush();
+		
 	}
 
 	@Override

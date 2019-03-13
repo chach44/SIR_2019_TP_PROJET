@@ -6,8 +6,8 @@ import javax.persistence.Persistence;
 
 public class EntityManagerHelper {
 
-    private static final EntityManagerFactory emf; 
-    private static final ThreadLocal<EntityManager> threadLocal;
+	public static final EntityManagerFactory emf; 
+	public static final ThreadLocal<EntityManager> threadLocal;	
 
     static {
         emf = Persistence.createEntityManagerFactory("dev");      

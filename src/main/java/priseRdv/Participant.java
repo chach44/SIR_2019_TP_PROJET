@@ -24,10 +24,10 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "Participant.findById", query = "SELECT p FROM Participant p where p.email = :email ") })
 public class Participant {
 
-	private String name, firstname, email;
-	private Collection<Nourriture> lesAllergies;
-	private Collection<Nourriture> lesPreferences;
-	private Collection<Sondages> lesSondagesCreer;
+	public String name, firstname, email;
+	public Collection<Nourriture> lesAllergies;
+	public Collection<Nourriture> lesPreferences;
+	public Collection<Sondages> lesSondagesCreer;
 	static EntityManagerHelper manager ;
 
 	public Participant(String name, String firstname, String email) {
@@ -103,7 +103,7 @@ public class Participant {
 	public static void sauvgarder(Participant p) {
 		try {
 			 
-			manager.beginTransaction();
+			  manager.beginTransaction();
 			  manager.getEntityManager().persist(p);
 			  manager.commit();
 			  
