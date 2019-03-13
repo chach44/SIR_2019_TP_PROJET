@@ -1,5 +1,6 @@
 package priseRdv;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -7,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -20,7 +22,8 @@ public class Nourriture {
 	public int idAliment;
 	public String nomAliment;
 	static EntityManagerHelper manager ;
-
+	public Collection<Participant> lesParticipantsAllergiques;
+	public Collection<Participant> lesPreferencesParticipants;
 	public Nourriture(String nomAliment) {
 		this.nomAliment = nomAliment;
 	}
@@ -90,5 +93,19 @@ public class Nourriture {
 			System.out.println(e.getMessage());
 			return null;
 		}
+	}
+	@ManyToMany (mappedBy = "lesAllergies")
+	public Collection<Participant> getLesParticipantsAllergiques() {
+		return lesParticipantsAllergiques;
+	}
+	public void setLesParticipantsAllergiques(Collection<Participant> lesParticipantsAllergiques) {
+		this.lesParticipantsAllergiques = lesParticipantsAllergiques;
+	}
+	@ManyToMany (mappedBy = "lesPreferences")
+	public Collection<Participant> getLesPreferencesParticipants() {
+		return lesPreferencesParticipants;
+	}
+	public void setLesPreferencesParticipants(Collection<Participant> lesPreferencesParticipants) {
+		this.lesPreferencesParticipants = lesPreferencesParticipants;
 	}
 }

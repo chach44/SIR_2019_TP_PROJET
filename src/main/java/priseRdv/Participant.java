@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
@@ -81,7 +82,7 @@ public class Participant {
 		lesPreferences.add(preferences);
 	}
 
-	@ManyToMany
+	@ManyToMany  @JoinTable(name="preferences")
 	public Collection<Nourriture> getLesPreferences() {
 		return lesPreferences;
 	}
@@ -95,7 +96,7 @@ public class Participant {
 		this.lesSondagesCreer = lesSondagesCreer;
 	}
 
-	@ManyToMany
+	@ManyToMany @JoinTable(name="allergies")
 	public Collection<Nourriture> getLesAllergies() {
 		return lesAllergies;
 	}
